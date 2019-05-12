@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="main-bannner">
+        <div class="container">
+            <div class="banner">
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse main-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Đào tạo</a></li>
+                    <li><a href="#">Khoa học công nghệ</a></li>
+                    <li><a href="#">Hợp tác và phát triển</a></li>
+                    <li><a href="#">Học sinh -  sinh viên - VĐV</a></li>
+                    <li><a href="#">Cán bộ</a></li>
+                    <li><a href="#">Quy trình ISO</a></li>
+                    <li><a href="#">Lịch công tác</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+            <div class="title text-center">
+                Trường đại học thể dục thể thao bắc ninh
+            </div>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
