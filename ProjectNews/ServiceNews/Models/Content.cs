@@ -28,12 +28,14 @@
         public int contentView { get; set; }
         public int isSort { get; set; }
         public bool isTrash { get; set; }
+        public bool? isNew { get; set; }
+        public string authorize { get; set; }
     }
     public class ContentView
     {
         public int Total { set; get; }
         public int TotalRecord { set; get; }
-        public IEnumerable<Content> Contents { set; get; }
+        public IEnumerable<Content> ViewContents { set; get; }
     }
     public class DropdownModel
     {

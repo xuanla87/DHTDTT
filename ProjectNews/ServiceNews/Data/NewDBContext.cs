@@ -15,6 +15,9 @@
             this.Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<Content> Contents { set; get; }
+        public DbSet<Contact> Contacts { set; get; }
+        public DbSet<Menu> Menus { set; get; }
+        public DbSet<ConfigSystem> ConfigSystems { set; get; }
         public static NewDbContext Create()
         {
             return new NewDbContext();

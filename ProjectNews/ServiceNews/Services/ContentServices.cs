@@ -53,15 +53,12 @@
 
         public Content Delete(int _id)
         {
-            return _Repository.Delete(_id);
+            return _Repository.Delete((int)_id);
         }
         public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetAll();
-            if (!string.IsNullOrEmpty(_contentKey))
-            {
-                enContent = enContent.Where(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
-            }
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey);
+           
             if (!string.IsNullOrEmpty(_keyWords))
             {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || x.contentAlias.Contains(_keyWords.ToLower().Trim()));
@@ -82,11 +79,7 @@
             {
                 enContent = enContent.Where(x => x.contentUpdateTime.Date <= _toDate.Value.Date);
             }
-            if (_languageId.HasValue)
-            {
-                enContent = enContent.Where(x => x.contentLanguageId == _languageId.Value);
-            }
-            enContent = enContent.OrderByDescending(x => x.contentUpdateTime);
+            enContent = enContent.OrderByDescending(x => x.contentCreateTime);
             int totalRecord = enContent.Count();
             if (_pageIndex != null && _pageSize != null)
             {
@@ -98,7 +91,7 @@
                 totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
                 enContent = enContent.Take(_pageSize.Value);
             }
-            return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
+            return new ContentView { ViewContents = enContent, Total = totalPage, TotalRecord = totalRecord };
         }
         public IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize)
         {
@@ -129,7 +122,7 @@
         }
         public Content Trash(int _id)
         {
-            var enContent = _Repository.GetSingleById(_id);
+            var enContent = _Repository.GetSingleById((int)_id);
             if (enContent != null && enContent.isTrash == false)
                 enContent.isTrash = true;
             _Repository.Update(enContent);
@@ -139,7 +132,7 @@
 
         public Content UnTrash(int _id)
         {
-            var enContent = _Repository.GetSingleById(_id);
+            var enContent = _Repository.GetSingleById((int)_id);
             if (enContent != null && enContent.isTrash == true)
                 enContent.isTrash = false;
             _Repository.Update(enContent);
@@ -157,7 +150,7 @@
 
         public Content GetById(int _id)
         {
-            return _Repository.GetSingleById(_id);
+            return _Repository.GetSingleById((int)_id);
         }
 
 
@@ -165,7 +158,7 @@
         {
             if (_id.HasValue)
             {
-                var entity = _Repository.GetSingleById(_id.Value);
+                var entity = _Repository.GetSingleById((int)_id.Value);
                 if (entity != null && entity.contentName != null)
                     return entity.contentName;
                 else return null;
@@ -180,13 +173,14 @@
                 var entitys = _Repository.GetMulti(x => x.isTrash == false && x.contentKey == _key && x.contentLanguageId == _languageId);
                 if (_curentId.HasValue && _curentId > 0)
                     entitys = entitys.Where(x => x.contentId != _curentId && x.contentParentId != _curentId);
+                int totalRecord = entitys.Count();
                 var result = new List<DropdownModel>();
                 foreach (var item in entitys)
                 {
                     if (item.contentParentId == null || item.contentParentId == 0)
                     {
                         result.Add(new DropdownModel { Text = item.contentName, Value = item.contentId });
-                        DropdownlistChild(result, entitys, item.contentId, "-");
+                        DropdownlistChild(result, entitys, (int)item.contentId, "-");
                     }
                 }
                 return result;
@@ -197,7 +191,7 @@
             }
         }
 
-        private IEnumerable<DropdownModel> DropdownlistChild(List<DropdownModel> model, IEnumerable<Content> entity, long _parentId, string st)
+        private IEnumerable<DropdownModel> DropdownlistChild(List<DropdownModel> model, IEnumerable<Content> entity, int _parentId, string st)
         {
             try
             {
@@ -206,7 +200,7 @@
                     if (item.contentParentId == _parentId)
                     {
                         model.Add(new DropdownModel { Text = st + item.contentName, Value = item.contentId });
-                        DropdownlistChild(model, entity, item.contentId, st + st);
+                        DropdownlistChild(model, entity, (int)item.contentId, st + st);
                     }
                 }
                 return model;

@@ -12,7 +12,21 @@ namespace ProjectNews
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+              name: "TIMKIEM",
+              url: "tim-kiem",
+              defaults: new { controller = "Home", action = "Search", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+             name: "LIENHE",
+             url: "lien-he",
+             defaults: new { controller = "Home", action = "LienHe", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+              name: "detail",
+              url: "{pageUrl}",
+              defaults: new { controller = "Home", action = "Display", pageUrl = UrlParameter.Optional }
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

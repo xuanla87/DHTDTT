@@ -1,0 +1,26 @@
+﻿
+@using ServiceNews.Models
+@model List<Menu>
+@if (Model != null && Model.Count > 0)
+{
+    <ul class="main-nav nav navbar-nav">
+        @foreach (var item in Model)
+        {
+            if (item.menuLink == "/" || string.IsNullOrEmpty(item.menuLink))
+            {
+                <li class="active">
+                    <a href="@item.menuLink">@item.menuName</a>
+                    @Html.Action("getSubMenu", "Home", new { Id = item.menuId })
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="@item.menuLink">@item.menuName</a>
+                    @Html.Action("getSubMenu", "Home", new { Id = item.menuId })
+                </li>
+            }
+
+        }
+    </ul>
+}

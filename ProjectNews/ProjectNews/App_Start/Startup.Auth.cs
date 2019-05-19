@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Reflection;
+using System.Web.Mvc;
+using Autofac;
+using Autofac.Integration.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -6,6 +10,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ProjectNews.Models;
+using ServiceNews.Data;
+using ServiceNews.Data.Infrastructure;
+using ServiceNews.Data.Repositories;
+using ServiceNews.Services;
 
 namespace ProjectNews
 {
@@ -63,6 +71,28 @@ namespace ProjectNews
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());
+
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
+            builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
+            builder.RegisterType<NewDbContext>().AsSelf().InstancePerRequest();
+
+
+            // Repositories
+            builder.RegisterAssemblyTypes(typeof(ContentRepository).Assembly)
+                .Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces().InstancePerRequest();
+
+
+            // Services
+            builder.RegisterAssemblyTypes(typeof(ContentServices).Assembly)
+               .Where(t => t.Name.EndsWith("Services"))
+               .AsImplementedInterfaces().InstancePerRequest();
+
+            Autofac.IContainer container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }
