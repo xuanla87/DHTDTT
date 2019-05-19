@@ -55,6 +55,13 @@ $("#contentThumbnail").click(function () {
     };
     ckfiner.popup();
 });
+$("#Img").click(function () {
+    var ckfiner = new CKFinder();
+    ckfiner.selectActionFunction = function (fileUrl) {
+        $("#Img").val(fileUrl);
+    };
+    ckfiner.popup();
+});
 $("#SiteBanner").click(function () {
     var ckfiner = new CKFinder();
     ckfiner.selectActionFunction = function (fileUrl) {
@@ -214,4 +221,14 @@ function UnApprovalDetail(x) {
             }
         });
     }
+}
+function logout() {
+    $.ajax({
+        type: "GET",
+        url: "Account/LogOff",
+        datatype: "json",
+        success: function (data) {
+            window.location.reload(true);
+        }
+    });
 }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ProjectNews.Areas.Admin.Controllers
 {
+    [Authorize]
     public class DefaultController : Controller
     {
         public ActionResult Index()

@@ -77,7 +77,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 entity.languageId = 1;
                 _services.Add(entity);
                 _services.Save();
-                //return RedirectToAction("Index", new { _parentId = entity.menuParentId });
+                return RedirectToAction("Index", new { _parentId = entity.menuParentId });
             }
             var category = _services.Dropdownlist(0, model.Id, 1);
             ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });

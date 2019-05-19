@@ -5,34 +5,42 @@
 @model ServiceNews.Models.Content
 @if (Model != null)
 {
-    <div class="breadcrumb">
-        @Html.Action("getBreadcrumb", "Home", new { pageUrl = Model.contentAlias })
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="breadcrumb">
+                @Html.Action("getBreadcrumb", "Home", new { pageUrl = Model.contentAlias })
+            </div>
+            @if (Model.contentKey.StartsWith("CHUYENMUC"))
+            {
+                <div class="page-content">
+                    @Html.Action("getChildDisplay", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+                    @Html.Raw(Model.contentBody)
+                </div>
+            }
+            else
+            {
+                <div class="page-content">
+                    <h1 class="page-title">@Model.contentName</h1>
+                    <div class="date-post text-left">
+                        <i class="fa fa-clock-o"></i> @Model.contentCreateTime.ToString("dd-MM-yyyy HH-mm")
+                    </div>
+                    @Html.Raw(Model.contentDescription)
+                    @Html.Raw(Model.contentBody)
+                    <div class="text-right">
+                        @if (string.IsNullOrEmpty(Model.authorize))
+                        {
+                            <div>Tác Giả</div>
+                        }
+                        @Html.Raw(Model.authorize)
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-lg-4">
+            @Html.Action("getDanhMucPhai", "Home")
+            @Html.Action("getBoxBannerPhai", "Home")
+        </div>
     </div>
-    if (Model.contentKey.StartsWith("CHUYENMUC"))
-    {
-        <div class="page-content">
-            @Html.Action("getChildDisplay", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
-            @Html.Raw(Model.contentBody)
-        </div>
-    }
-    else
-    {
-        <div class="page-content">
-            <h1 class="page-title">@Model.contentName</h1>
-            <div class="date-post text-left">
-                <i class="fa fa-clock-o"></i> @Model.contentCreateTime.ToString("dd-MM-yyyy HH-mm")
-            </div>
-            @Html.Raw(Model.contentDescription)
-            @Html.Raw(Model.contentBody)
-            <div class="text-right">
-                @if (string.IsNullOrEmpty(Model.authorize))
-                {
-                    <div>Tác Giả</div>
-                }
-                @Html.Raw(Model.authorize)
-            </div>
-        </div>
-    }
 }
 else
 {

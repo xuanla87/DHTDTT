@@ -8,11 +8,13 @@ namespace ProjectNews.Areas.Admin.Models
     public class ModelCaiDatHeThong
     {
         public int? DanhMucChinh { get; set; }
+        public int? DanhMucPhai { get; set; }
         public string SiteTitle { get; set; }
         public string SiteKeywords { get; set; }
         public string SiteDescription { get; set; }
         public string SiteBanner { get; set; }
         public string SiteFooterInfo { get; set; }
+        public string SiteAbout { get; set; }
         public string SiteEmail { get; set; }
         public string SiteContact { get; set; }
         public int? BoxTinTucChung { get; set; }
@@ -21,5 +23,8 @@ namespace ProjectNews.Areas.Admin.Models
         public int? BoxLienKet { get; set; }
         public int? BoxPhongSuAnh { get; set; }
         public int? BoxMedia { get; set; }
+        public int? BoxSlider { get; set; }
+        public int? BoxBanner { get; set; }
+        public int? BoxBannerRight { get; set; }
     }
 }

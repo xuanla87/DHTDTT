@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ServiceNews.Models.Content>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="box-banner">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="item">
+                    <a href="@item.contentDescription">
+                        <img src="@item.contentThumbnail" alt="@item.contentName" id="@item.isSort">
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+

@@ -13,6 +13,7 @@
         <div class="container">
             <div class="banner">
                 @Html.Action("getBannerMain", "Home")
+                @Html.Action("getSearch", "Home")
             </div>
         </div>
     </div>
@@ -36,6 +37,19 @@
         <footer>
             <div class="title text-center">
                 Trường đại học thể dục thể thao bắc ninh
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        @Html.Action("getFooterInfo", "Home")
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.Action("getAbout", "Home")
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.Action("_HitCounter", "Home")
+                    </div>
+                </div>
             </div>
         </footer>
     </div>

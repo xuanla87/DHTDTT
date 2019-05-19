@@ -25,7 +25,10 @@ namespace ProjectNews.Areas.Admin.Controllers
             var model = new ModelCaiDatHeThong();
             if (!string.IsNullOrEmpty(_services.GetValueByKey("DanhMucChinh")))
                 model.DanhMucChinh = int.Parse(_services.GetValueByKey("DanhMucChinh"));
+            if (!string.IsNullOrEmpty(_services.GetValueByKey("DanhMucPhai")))
+                model.DanhMucPhai = int.Parse(_services.GetValueByKey("DanhMucPhai"));
             model.SiteBanner = _services.GetValueByKey("SiteBanner");
+            model.SiteAbout = _services.GetValueByKey("SiteAbout");
             model.SiteContact = _services.GetValueByKey("SiteContact");
             model.SiteDescription = _services.GetValueByKey("SiteDescription");
             model.SiteEmail = _services.GetValueByKey("SiteEmail");
@@ -40,14 +43,31 @@ namespace ProjectNews.Areas.Admin.Controllers
                 model.BoxTinTucNganh = int.Parse(_services.GetValueByKey("BoxTinTucNganh"));
             if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxMedia")))
                 model.BoxMedia = int.Parse(_services.GetValueByKey("BoxMedia"));
+            if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxSlider")))
+                model.BoxSlider = int.Parse(_services.GetValueByKey("BoxSlider"));
+            if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxBanner")))
+                model.BoxBanner = int.Parse(_services.GetValueByKey("BoxBanner"));
+            if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxBannerRight")))
+                model.BoxBannerRight = int.Parse(_services.GetValueByKey("BoxBannerRight"));
+            if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxLienKet")))
+                model.BoxLienKet = int.Parse(_services.GetValueByKey("BoxLienKet"));
+            if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxSachVaHocLieu")))
+                model.BoxSachVaHocLieu = int.Parse(_services.GetValueByKey("BoxSachVaHocLieu"));
             var enMenu = _menuService.Dropdownlist(0, null, 1);
             var enTinTuc = _contentService.Dropdownlist(0, null, "CHUYENMUCTINTUC", 1);
+            var enBanner = _contentService.Dropdownlist(0, null, "BANNER", 1);
             ViewBag.DanhMucChinh = enMenu.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
-            ViewBag.TinTucChung = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
-            ViewBag.TinTucNganh = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
-            ViewBag.PhongSuAnh = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
-            ViewBag.Media = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.DanhMucPhai = enMenu.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxTinTucChung = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxTinTucNganh = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxPhongSuAnh = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxMedia = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.SachVaHocLieu = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxSlider = enBanner.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxBanner = enBanner.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxBannerRight = enBanner.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxLienKet = enBanner.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxSachVaHocLieu = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(model);
         }
         [HttpPost]
@@ -58,8 +78,10 @@ namespace ProjectNews.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _services.SaveData("DanhMucChinh", model.DanhMucChinh.ToString());
+                _services.SaveData("DanhMucPhai", model.DanhMucPhai.ToString());
                 _services.SaveData("SiteBanner", model.SiteBanner);
                 _services.SaveData("SiteContact", model.SiteContact);
+                _services.SaveData("SiteAbout", model.SiteAbout);
                 _services.SaveData("SiteDescription", model.SiteDescription);
                 _services.SaveData("SiteEmail", model.SiteEmail);
                 _services.SaveData("SiteFooterInfo", model.SiteFooterInfo);
@@ -70,6 +92,9 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _services.SaveData("BoxTinTucChung", model.BoxTinTucChung.ToString());
                 _services.SaveData("BoxTinTucNganh", model.BoxTinTucNganh.ToString());
                 _services.SaveData("BoxLienKet", model.BoxLienKet.ToString());
+                _services.SaveData("BoxSlider", model.BoxSlider.ToString());
+                _services.SaveData("BoxBanner", model.BoxBanner.ToString());
+                _services.SaveData("BoxBannerRight", model.BoxBannerRight.ToString());
             }
             return RedirectToAction("Index");
         }

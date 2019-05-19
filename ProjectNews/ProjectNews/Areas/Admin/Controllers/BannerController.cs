@@ -101,6 +101,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     model.contentThumbnail = entity.Img;
                     model.contentName = entity.Name;
                     model.contentParentId = entity.ParentId;
+                    model.isSort = entity.IsSort;
                     _services.Update(model);
                     _services.Save();
                 }

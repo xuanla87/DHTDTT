@@ -37,7 +37,7 @@
                             <ul class="dropdown-menu">
                                 <li class="user-footer">
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Thoát</a>
+                                        <a href="#" class="btn btn-default btn-flat" onclick="logout()">Thoát</a>
                                     </div>
                                 </li>
                             </ul>
@@ -60,7 +60,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("Index","TinTuc")"><i class="fa fa-circle-o"></i> Danh sách</a></li>
-                            <li><a href="@Url.Action("ThemMoi","TinTuc")"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+                            <li><a href="@Url.Action("Detail","TinTuc")"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
                             <li><a href="@Url.Action("Index","ChuyenMucTinTuc")"><i class="fa fa-circle-o"></i> Chuyên mục</a></li>
                         </ul>
                     </li>
