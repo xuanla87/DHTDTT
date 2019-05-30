@@ -104,6 +104,21 @@ textarea {
         max-width: 100%;
     }
 
+.decs {
+    font-weight: 500;
+    text-align: justify;
+}
+
+.page-des {
+    font-weight: 600;
+}
+.readmore {
+    text-align: right;
+}
+.readmore a {
+    font-weight: 500;
+}
+
 .notification {
     background: #f5f4f2;
 }

@@ -24,7 +24,9 @@
                     <div class="date-post text-left">
                         <i class="fa fa-clock-o"></i> @Model.contentCreateTime.ToString("dd-MM-yyyy HH-mm")
                     </div>
-                    @Html.Raw(Model.contentDescription)
+                    <div class="page-des">
+                        @Html.Raw(Model.contentDescription)
+                    </div>
                     @Html.Raw(Model.contentBody)
                     <div class="text-right">
                         @if (string.IsNullOrEmpty(Model.authorize))

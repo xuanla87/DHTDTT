@@ -72,14 +72,7 @@
 @section scriptAs {
     <script>
         $(function () {
-            CKEDITOR.replace('Body', {
-                toolbar: [
-                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                    ['Bold', 'Italic', 'Underline'],
-                    ['Image', 'Youtube', 'Link', 'Unlink'], ['Styles', 'Format', 'Font', 'FontSize'], ['TextColor', 'BGColor'], ['Maximize', 'Source']
-                ], height: '500px'
-
-            });
+            CKEDITOR.replace('Body');
         });
         function Changed(textControl) {
             document.getElementById('Link').value = geturl(textControl.value);

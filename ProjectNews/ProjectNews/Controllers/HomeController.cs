@@ -140,6 +140,8 @@ namespace ProjectNews.Controllers
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxTinTucChung"), out Id);
             var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null);
+            var entity = _services.GetById(Id);
+            ViewBag.Readmore = "<a href=\"" + entity.contentAlias + "\">>>>>Xem thêm</a>";
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(6));
         }
 
@@ -148,6 +150,8 @@ namespace ProjectNews.Controllers
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxTinTucNganh"), out Id);
             var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null);
+            var entity = _services.GetById(Id);
+            ViewBag.Readmore = "<a href=\"" + entity.contentAlias + "\">>>>>Xem thêm</a>";
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(5));
         }
 
