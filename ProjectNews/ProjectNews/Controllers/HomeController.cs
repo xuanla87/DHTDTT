@@ -249,5 +249,57 @@ namespace ProjectNews.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult LienHe()
+        {
+            Session["CAPTCHA"] = GetRandomText();
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult LienHe(Contact entity, string txtCaptcha)
+        {
+            if (ModelState.IsValid)
+            {
+                string text = Session["CAPTCHA"].ToString();
+                if (txtCaptcha.ToLower() == text.ToLower())
+                {
+                    var model = new Contact();
+                    model.contactFullName = entity.contactFullName;
+                    model.contactTitle = entity.contactTitle;
+                    model.contactEmail = entity.contactEmail;
+                    model.contactBody = entity.contactBody;
+                    model.createTime = DateTime.Now;
+                    model.isTrash = false;
+                    _contactServices.Add(model);
+                    _contactServices.Save();
+                    return Redirect("/");
+                }
+                return View(entity);
+            }
+            return View(entity);
+        }
+
+        private string GetRandomText()
+        {
+            StringBuilder randomText = new StringBuilder();
+            string alphabets = "012345679ACEFGHKLMNPRSWXZabcdefghijkhlmnopqrstuvwxyz";
+            Random r = new Random();
+            for (int j = 0; j < 4; j++)
+            {
+                randomText.Append(alphabets[r.Next(alphabets.Length)]);
+            }
+            return randomText.ToString();
+        }
+
+        public FileResult GetCaptchaImage()
+        {
+            string text = Session["CAPTCHA"].ToString();
+            MemoryStream ms = new MemoryStream();
+            RandomImage _captcha = new RandomImage(text, 220, 50);
+            _captcha.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            _captcha.Dispose();
+            return File(ms.ToArray(), "image/png");
+        }
     }
 }
