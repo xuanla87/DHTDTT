@@ -90,6 +90,10 @@ namespace ProjectNews.Controllers
                     ViewBag.PTitle = "<a href=\"" + model.contentAlias + "\">" + model.contentName + "</a>";
                 }
             }
+            else if (entity != null)
+            {
+                ViewBag.PTitle = "<a href=\"/\">Trang chủ</a> >> " + entity.contentName ;
+            }
             return PartialView();
         }
 
@@ -185,7 +189,6 @@ namespace ProjectNews.Controllers
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime));
         }
 
-
         public ActionResult getFooterInfo()
         {
             string _footer = _configSystemServices.GetValueByKey("SiteFooterInfo");
@@ -227,6 +230,24 @@ namespace ProjectNews.Controllers
         public ActionResult Search(string searchKey, int? pageIndex)
         {
             return View();
+        }
+
+        public ActionResult getChildDisplay(int Id, string _url, int? _pageIndex)
+        {
+            int _totalRecord = 0;
+            _pageIndex = _pageIndex ?? 1;
+            var entity = _services.GetAll(null, null, null, Id, null, 1, false, _pageIndex, 10);
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            ViewBag.CurentUrl = _url;
+            return PartialView(entity.ViewContents.OrderBy(x => x.isSort));
+        }
+
+        public ActionResult getMenuTop()
+        {
+            return PartialView();
         }
     }
 }

@@ -38,6 +38,12 @@ textarea {
     }
 
 .sub-menu {
+    width: 250px;
+    background: #f5f4f2;
+    border: 1px solid #eee;
+}
+
+.sub-menu {
     display: none;
     position: absolute;
     top: 50px;
@@ -47,7 +53,12 @@ textarea {
 
     .sub-menu li a {
         font-size: 12px;
+        text-transform: initial;
     }
+
+        .sub-menu li a:hover {
+            background: none;
+        }
 
 .nav li:hover {
     cursor: pointer;
@@ -63,6 +74,10 @@ textarea {
 
 .sub-menu li {
     border: none;
+}
+
+a.title {
+    font-weight: 600;
 }
 
 .banner {
@@ -112,12 +127,14 @@ textarea {
 .page-des {
     font-weight: 600;
 }
+
 .readmore {
     text-align: right;
 }
-.readmore a {
-    font-weight: 500;
-}
+
+    .readmore a {
+        font-weight: 500;
+    }
 
 .notification {
     background: #f5f4f2;
@@ -245,6 +262,8 @@ footer .body {
 .breadcrumb {
     border-radius: inherit;
     background: #8dd8f7;
+    padding: 10px 15px;
+    font-weight: 600;
 }
 
     .breadcrumb a {
@@ -258,6 +277,43 @@ footer .body {
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
+
+.menu-top {
+    position: relative;
+}
+
+    .menu-top .navbar-nav {
+        float: right;
+        background: #8dd8f7;
+        border-radius: 5px;
+        padding: 5px 15px;
+    }
+
+        .menu-top .navbar-nav a {
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #294da1;
+            padding: 5px 7px;
+        }
+
+            .menu-top .navbar-nav a:hover {
+                background: none;
+            }
+
+.facebook img {
+    width: 16px;
+    height: auto;
+}
+
+.messenger {
+    background: #fff;
+    border-radius: 5px;
+}
+
+    .messenger img {
+        width: 20px;
+        height: auto;
+    }
 
 .banner {
     position: relative;

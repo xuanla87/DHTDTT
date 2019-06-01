@@ -29,10 +29,6 @@
                     </div>
                     @Html.Raw(Model.contentBody)
                     <div class="text-right">
-                        @if (string.IsNullOrEmpty(Model.authorize))
-                        {
-                            <div>Tác Giả</div>
-                        }
                         @Html.Raw(Model.authorize)
                     </div>
                 </div>

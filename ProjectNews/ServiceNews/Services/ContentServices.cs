@@ -58,11 +58,15 @@
         }
         public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey);
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value);
 
             if (!string.IsNullOrEmpty(_keyWords))
             {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || x.contentAlias.Contains(_keyWords.ToLower().Trim()));
+            }
+            if (!string.IsNullOrEmpty(_contentKey))
+            {
+                enContent = enContent.Where(x => x.contentKey== _contentKey);
             }
             if (_isTrash.HasValue)
             {
