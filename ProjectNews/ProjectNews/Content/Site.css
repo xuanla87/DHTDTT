@@ -36,7 +36,9 @@ textarea {
         color: #294da1 !important;
         font-weight: 600;
     }
-
+    .main-nav li > a:hover {
+        color:#b7250c !important;
+    }
 .sub-menu {
     width: 250px;
     background: #8dd8f7;
