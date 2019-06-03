@@ -92,7 +92,7 @@ namespace ProjectNews.Controllers
             }
             else if (entity != null)
             {
-                ViewBag.PTitle = "<a href=\"/\">Trang chủ</a> >> " + entity.contentName ;
+                ViewBag.PTitle = "<a href=\"/\">Trang chủ</a> >> " + entity.contentName;
             }
             return PartialView();
         }
@@ -193,6 +193,13 @@ namespace ProjectNews.Controllers
         {
             string _footer = _configSystemServices.GetValueByKey("SiteFooterInfo");
             ViewBag.Footer = _footer;
+            return PartialView();
+        }
+
+        public ActionResult getBanDo()
+        {
+            string _footer = _configSystemServices.GetValueByKey("BanDo");
+            ViewBag.Footer = "<div class=\"col-lg-3 ban-do\">" + _footer + "</div>";
             return PartialView();
         }
 
@@ -300,6 +307,58 @@ namespace ProjectNews.Controllers
             _captcha.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             _captcha.Dispose();
             return File(ms.ToArray(), "image/png");
+        }
+
+        public ActionResult ThongBao(int? _pageIndex)
+        {
+            int _totalRecord = 0;
+            var entity = _services.GetThongBao(null, null, null, null, "TINTUC", 1, false, true, _pageIndex, 10);
+            _pageIndex = _pageIndex ?? 1;
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            return View(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
+        }
+
+        public ActionResult LichCongTac()
+        {
+            var entity = _services.GetAll(null, null, null, null, "DONVIPHONGKHOA", 1, false, null, null);
+            return View(entity.ViewContents.Where(x => x.contentParentId == null).OrderByDescending(x => x.contentCreateTime));
+        }
+
+        public ActionResult childenLichCongTac(int Id)
+        {
+            var entity = _services.GetAll(null, null, null, Id, "DONVIPHONGKHOA", 1, false, null, null);
+            return PartialView(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
+        }
+
+        public ActionResult LichCongTacChilden(int Id, string _url, int? _pageIndex)
+        {
+            int _totalRecord = 0;
+            var entity = _services.GetThongBao(null, null, null, Id, "LICHCONGTAC", 1, false, true, _pageIndex, 10);
+            _pageIndex = _pageIndex ?? 1;
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            ViewBag.CurentUrl = _url;
+            return PartialView(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
+        }
+
+        public ActionResult ViewVanBan(int Id, string _url, int? _pageIndex)
+        {
+            int _totalRecord = 0;
+            _pageIndex = _pageIndex ?? 1;
+            var entity = _services.GetAll(null, null, null, Id, "DOCUMENT", 1, false, _pageIndex, 10);
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            ViewBag.CurentUrl = _url;
+            var entitys = _services.GetAll(null, null, null, Id, "CHUYENMUCTINTUC", 1, false, null, null);
+            ViewBag.ListItem = entitys.ViewContents.OrderBy(x => x.isSort).ToList();
+            return PartialView(entity.ViewContents);
         }
     }
 }

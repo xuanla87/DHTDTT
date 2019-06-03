@@ -1,0 +1,16 @@
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\ServiceNews.dll.config
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\ServiceNews.dll
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\ServiceNews.pdb
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\EntityFramework.dll
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\EntityFramework.SqlServer.dll
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\Microsoft.AspNet.Identity.Core.dll
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\EntityFramework.xml
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\EntityFramework.SqlServer.xml
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\Microsoft.AspNet.Identity.Core.xml
+G:\DHTDTT\ProjectNews\ServiceNews\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+G:\DHTDTT\ProjectNews\ServiceNews\obj\Release\ServiceNews.csprojAssemblyReference.cache
+G:\DHTDTT\ProjectNews\ServiceNews\obj\Release\ServiceNews.csproj.CoreCompileInputs.cache
+G:\DHTDTT\ProjectNews\ServiceNews\obj\Release\ServiceNews.csproj.CopyComplete
+G:\DHTDTT\ProjectNews\ServiceNews\obj\Release\ServiceNews.dll
+G:\DHTDTT\ProjectNews\ServiceNews\obj\Release\ServiceNews.pdb

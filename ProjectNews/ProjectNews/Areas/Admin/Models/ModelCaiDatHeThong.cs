@@ -26,5 +26,6 @@ namespace ProjectNews.Areas.Admin.Models
         public int? BoxSlider { get; set; }
         public int? BoxBanner { get; set; }
         public int? BoxBannerRight { get; set; }
+        public string BanDo { get; set; }
     }
 }

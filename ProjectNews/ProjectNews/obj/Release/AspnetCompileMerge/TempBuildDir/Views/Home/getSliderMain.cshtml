@@ -1,0 +1,33 @@
+﻿@{
+    int count = 0;
+}
+@model IEnumerable<ServiceNews.Models.Content>
+@if (Model != null && Model.Count() > 0)
+{
+    <div id="slider-main" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var item in Model)
+            {
+                count++;
+                if (count == 1)
+                {
+                    <div class="item active">
+                        <a href="@item.contentDescription">
+                            <img src="@item.contentThumbnail" alt="@item.contentName">
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="item">
+                        <a href="@item.contentDescription">
+                            <img src="@item.contentThumbnail" alt="@item.contentName">
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+
+

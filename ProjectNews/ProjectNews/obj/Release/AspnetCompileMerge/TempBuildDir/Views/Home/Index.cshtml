@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="box">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="slider-main">
+                @Html.Action("getSliderMain", "Home")
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="slider-left">
+                @Html.Action("getBox1", "Home")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="box">
+                <div class="title">
+                    <h2><a href="#">Tin tức chung</a></h2>
+                    @Html.Action("getBoxTinTucChung", "Home")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box">
+                <div class="title">
+                    <h2><i class="fa fa-bell icon"></i><a href="#">Thông báo mới</a></h2>
+                    @Html.Action("getThongBao", "Home")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box ">
+                <div class="title">
+                    <h2><a href="#">Tin tức ngành</a></h2>
+                    @Html.Action("getBoxTinTucNganh", "Home")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box">
+                <div class="title">
+                    <h2><a href="#">Sách và học liệu</a></h2>
+                    @Html.Action("getBoxSachVaHocLieu", "Home")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box">
+                <div class="title">
+                    <h2><a href="#">Liên kết</a></h2>
+                </div>
+                @Html.Action("getBoxLienKet", "Home")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+                <div class="title">
+                    <h2><a href="#">Phóng sự ảnh</a></h2>
+                    @Html.Action("getBoxPhongSuAnh", "Home")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box">
+                <div class="title">
+                    <h2><a href="#">Media</a></h2>
+                    @Html.Action("getBoxMedia", "Home")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

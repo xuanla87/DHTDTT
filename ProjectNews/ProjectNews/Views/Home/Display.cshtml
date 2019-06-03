@@ -17,6 +17,18 @@
                     @Html.Raw(Model.contentBody)
                 </div>
             }
+            else if (Model.contentKey.StartsWith("DONVIPHONGKHOA"))
+            {
+                <div class="page-content">
+                    @Html.Action("LichCongTacChilden", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+                </div>
+            }
+            else if (Model.contentKey.StartsWith("CHUYENMUCTINTUC"))
+            {
+                <div class="page-content">
+                    @Html.Action("ViewVanBan", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+                </div>
+            }
             else
             {
                 <div class="page-content">

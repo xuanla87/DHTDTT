@@ -39,8 +39,7 @@ textarea {
 
 .sub-menu {
     width: 250px;
-    background: #f5f4f2;
-    border: 1px solid #eee;
+    background: #8dd8f7;
 }
 
 .sub-menu {
@@ -54,10 +53,11 @@ textarea {
     .sub-menu li a {
         font-size: 12px;
         text-transform: initial;
+        padding: 8px 5px;
     }
 
         .sub-menu li a:hover {
-            background: none;
+            color: #b7250c !important;
         }
 
 .nav li:hover {
@@ -350,4 +350,44 @@ footer .body {
     line-height: 50px;
     padding: 0px 8px;
     color: #f16e20 !important;
+}
+
+.lich-cong-tac {
+}
+
+    .lich-cong-tac .item {
+        float: left;
+        width: 25%;
+        border: 1px solid #294da1;
+        box-sizing: border-box;
+       
+    }
+        .lich-cong-tac .item .body {
+            height: 200px;
+            overflow: auto;
+        }
+.lich-cong-tac .item .title {
+    text-align: center;
+    border-bottom: 1px solid #294da1;
+    height: 60px;
+    background: #294da1;
+}
+
+            .lich-cong-tac .item .title a {
+                font-size: 13px;
+                vertical-align: central;
+                color: #fff;
+                font-weight:500;
+            }
+.sub-title {
+    padding-left: 8px;
+}
+.sub-title a {
+    line-height: initial;
+    font-size: 12px;
+    font-weight: 500;
+}
+.ban-do iframe{
+    width:100%;
+    height:150px;
 }

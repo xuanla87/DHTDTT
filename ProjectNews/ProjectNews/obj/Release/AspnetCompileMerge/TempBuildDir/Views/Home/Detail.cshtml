@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ServiceNews.Models.Content
+@if (Model != null)
+{
+    <div class="body-content">
+        @Html.Raw(Model.contentBody)
+    </div>
+}

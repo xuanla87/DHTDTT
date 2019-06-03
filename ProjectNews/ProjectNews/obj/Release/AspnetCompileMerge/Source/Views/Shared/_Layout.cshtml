@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="main-bannner">
+        <div class="container">
+            <div class="banner">
+                @Html.Action("getMenuTop", "Home")
+                @Html.Action("getBannerMain", "Home")
+                @Html.Action("getSearch", "Home")
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse main-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand home"><i class="fa fa-home"></i></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                @Html.Action("getMenuMain", "Home")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+            <div class="title text-center">
+                Trường đại học thể dục thể thao bắc ninh
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        @Html.Action("getFooterInfo", "Home")
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.Action("getAbout", "Home")
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.Action("_HitCounter", "Home")
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

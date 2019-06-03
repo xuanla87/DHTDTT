@@ -1,5 +1,3 @@
-G:\DHTDTT\ProjectNews\ServiceNews\obj\Debug\ServiceNews.csprojAssemblyReference.cache
-G:\DHTDTT\ProjectNews\ServiceNews\obj\Debug\ServiceNews.csproj.CoreCompileInputs.cache
 G:\DHTDTT\ProjectNews\ServiceNews\bin\Debug\ServiceNews.dll.config
 G:\DHTDTT\ProjectNews\ServiceNews\bin\Debug\ServiceNews.dll
 G:\DHTDTT\ProjectNews\ServiceNews\bin\Debug\ServiceNews.pdb
@@ -11,6 +9,8 @@ G:\DHTDTT\ProjectNews\ServiceNews\bin\Debug\EntityFramework.xml
 G:\DHTDTT\ProjectNews\ServiceNews\bin\Debug\EntityFramework.SqlServer.xml
 G:\DHTDTT\ProjectNews\ServiceNews\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 G:\DHTDTT\ProjectNews\ServiceNews\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+G:\DHTDTT\ProjectNews\ServiceNews\obj\Debug\ServiceNews.csproj.CoreCompileInputs.cache
 G:\DHTDTT\ProjectNews\ServiceNews\obj\Debug\ServiceNews.csproj.CopyComplete
 G:\DHTDTT\ProjectNews\ServiceNews\obj\Debug\ServiceNews.dll
 G:\DHTDTT\ProjectNews\ServiceNews\obj\Debug\ServiceNews.pdb
+G:\DHTDTT\ProjectNews\ServiceNews\obj\Debug\ServiceNews.csprojAssemblyReference.cache

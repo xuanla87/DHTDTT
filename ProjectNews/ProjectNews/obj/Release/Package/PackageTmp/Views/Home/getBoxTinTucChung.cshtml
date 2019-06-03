@@ -1,0 +1,64 @@
+﻿@{
+    int _item = 0;
+}
+@model IEnumerable<ServiceNews.Models.Content>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="box-body">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                _item++;
+                if (_item < 3)
+                {
+                    <div class="col-md-4">
+                        <div class="item">
+                            <a href="@item.contentAlias" title="@item.contentName">
+                                <img src="@item.contentThumbnail" alt="@item.contentName">
+                            </a>
+                            <div class="title">
+                                <a href="@item.contentAlias" title="@item.contentName">
+                                    @if (item.contentName.Length > 70)
+                                    {
+                                        @Html.Raw(item.contentName.Substring(0, 70) + "...")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(item.contentName)
+                                    }
+                                </a>
+                            </div>
+                            <div class="decs">
+                                @Html.Raw(item.contentDescription)
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-4">
+                        <div class="item margin-bottom-10">
+                            - <a class="no-font-weight" href="@item.contentAlias" title="@item.contentName">
+                                @if (item.contentName.Length > 70)
+                                {
+                                    @Html.Raw(item.contentName.Substring(0, 70) + "...")
+                                }
+                                else
+                                {
+                                    @Html.Raw(item.contentName)
+                                }
+                            </a>
+                        </div>
+                    </div>
+                }
+
+            }
+            <div class="readmore">
+                @Html.Raw(ViewBag.Readmore)
+            </div>
+        </div>
+    </div>
+}
+
+
+

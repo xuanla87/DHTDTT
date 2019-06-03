@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Lịch công tác";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<ServiceNews.Models.Content>
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="breadcrumb">
+                Lịch công tác
+            </div>
+            <div class="lich-cong-tac">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="title">
+                            <a href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
+                        </div>
+                        <div class="body">
+                            @Html.Action("childenLichCongTac", "Home", new { Id = item.contentId })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-4">
+            @Html.Action("getDanhMucPhai", "Home")
+            @Html.Action("getBoxBannerPhai", "Home")
+        </div>
+    </div>
+}
+else
+{
+    @Html.Action("Index", "Home")
+}
+

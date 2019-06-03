@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ServiceNews.Models.Content>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="box-body notification">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12">
+                    <div class="item">
+                        <a href="@item.contentAlias" title="@item.contentName">
+                            -
+                            @if (item.contentName.Length > 70)
+                            {
+                                @Html.Raw(item.contentName.Substring(0, 70) + "...")
+                                <img src="~/Content/iconnew.png" height="16" alt="icon-new" />
+                            }
+                            else
+                            {
+                                @Html.Raw(item.contentName)
+                                <img src="~/Content/iconnew.png" height="16" alt="icon-new" />
+                            }
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+

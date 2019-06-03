@@ -1,0 +1,15 @@
+﻿@using ServiceNews.Models
+@model List<Menu>
+@if (Model != null && Model.Count > 0)
+{
+    <ul class="sub-menu nav">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@item.menuLink">@item.menuName</a>
+                @Html.Action("getSubMenu", "Home", new { Id = item.menuId })
+            </li>
+        }
+    </ul>
+}
+

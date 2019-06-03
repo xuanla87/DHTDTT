@@ -1,0 +1,149 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model  ProjectNews.Areas.Admin.Models.ModelContent
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/TinTuc">Danh sách tin tức</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm())
+                {
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Tiêu đề", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.contentName, new { @class = "form-control geturl", @placeholder = "Nhập tiêu đề..", @onchange = "javascript: Changed(this);" })
+                                    @Html.ValidationMessageFor(x => x.contentName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Chuyên mục", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.contentParentId, null, "---Chọn chuyên mục---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.contentParentId, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Hình ảnh", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.contentThumbnail, new { @class = "form-control", @placeholder = "Chọn ảnh.." })
+                                    @Html.ValidationMessageFor(x => x.contentThumbnail, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    @Html.Label("Mô tả ngắn", new { @class = "control-lable" })
+                                    @Html.TextAreaFor(x => x.contentDescription, new { @class = "form-control", @placeholder = "Nhập ghi chú..", @rows = "5" })
+                                    @Html.ValidationMessageFor(x => x.contentDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Nội dung", new { @class = "control-lable" })
+                            @Html.TextAreaFor(x => x.contentBody, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.contentBody, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Thẻ tiêu đề", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.contentMetaTitle, new { @class = "form-control", @placeholder = "Thẻ tiêu đề.." })
+                                    @Html.ValidationMessageFor(x => x.contentMetaTitle, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Thẻ mô tả", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.contentMetaDescription, new { @class = "form-control", @placeholder = "Thẻ mô tả.." })
+                                    @Html.ValidationMessageFor(x => x.contentMetaDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Từ khóa", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.contentMetaKeywords, new { @class = "form-control", @placeholder = "Từ khóa.." })
+                                    @Html.ValidationMessageFor(x => x.contentMetaKeywords, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Ngày viết", new { @class = "control-lable" })
+                                        @Html.TextBoxFor(x => x.contentCreateTime, new { @class = "form-control datepicker", @placeholder = "Ngày.." })
+                                        @Html.ValidationMessageFor(x => x.contentCreateTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Label("Tác giả", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.authorize, new { @class = "form-control", @placeholder = "Nhập tác giả.." })
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.Label("Thứ tự", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.isSort, new { @class = "form-control number", @placeholder = "Nhập số.." })
+                                </div>
+
+                                @Html.HiddenFor(x => x.contentAlias)
+                                @Html.HiddenFor(x => x.contentId)
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                @Html.Label("Bài viết mới", new { @class = "control-lable" })
+                                @Html.CheckBoxFor(x => x.isNew)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+@section scriptAs {
+    <script>
+        $(function () {
+            CKEDITOR.replace('contentBody', {
+                toolbar: [
+                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                    ['Bold', 'Italic', 'Underline'],
+                    ['Image', 'Youtube', 'Link', 'Unlink'], ['Styles', 'Format', 'Font', 'FontSize'], ['TextColor', 'BGColor'], ['Maximize', 'Source']
+                ]
+
+            });
+            CKEDITOR.replace('contentDescription', {
+                toolbar: [
+                    ['Bold', 'Italic', 'Underline'],
+                    ['Styles', 'Format', 'Font', 'FontSize']
+                ], height: '100px'
+
+            });
+        });
+        function Changed(textControl) {
+            document.getElementById('contentAlias').value = geturl(textControl.value);
+            textControl.value = textControl.value.replace(/ + /g, " ");
+            textControl.value = textControl.value.replace(/^\ +|\ +$/g, "");
+        }
+    </script>
+}
+
+
