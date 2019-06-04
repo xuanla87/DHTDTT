@@ -36,9 +36,11 @@ textarea {
         color: #294da1 !important;
         font-weight: 600;
     }
-    .main-nav li > a:hover {
-        color:#b7250c !important;
-    }
+
+        .main-nav li > a:hover {
+            color: #b7250c !important;
+        }
+
 .sub-menu {
     width: 250px;
     background: #8dd8f7;
@@ -159,7 +161,7 @@ a.title {
     height: 335px;
     box-sizing: border-box;
     overflow: hidden;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
     .slider-main img {
@@ -187,18 +189,32 @@ a.title {
         width: 100%;
     }
 
-footer .title {
-    background: #8dd8f7;
-    color: #294da1;
-    padding: 10px 0px;
-    text-transform: uppercase;
-    font-weight: bold;
+footer {
+    margin-top: 30px;
 }
 
-footer .body {
-    padding: 20px 15px;
-    background: #1467b3;
-    color: #fff;
+    footer .title {
+        background: #8dd8f7;
+        color: #294da1;
+        padding: 10px 0px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    footer .body {
+        padding: 0px 15px;
+        background: #1467b3;
+        color: #fff;
+    }
+
+    footer .item {
+        display: table-cell;
+        height: 180px;
+        padding-top: 20px;
+    }
+
+.border-right {
+    border-right: 2px solid #fff;
 }
 
 .box {
@@ -359,38 +375,51 @@ footer .body {
 }
 
     .lich-cong-tac .item {
-        float: left;
-        width: 25%;
         border: 1px solid #294da1;
         box-sizing: border-box;
-       
+        margin-bottom: 5px;
     }
+
         .lich-cong-tac .item .body {
             height: 200px;
             overflow: auto;
         }
-.lich-cong-tac .item .title {
-    text-align: center;
-    border-bottom: 1px solid #294da1;
-    height: 60px;
-    background: #294da1;
-}
+
+        .lich-cong-tac .item .title {
+            border-bottom: 1px solid #294da1;
+            background: #294da1;
+        }
+
+            .lich-cong-tac .item .title .text {
+                color: #fff;
+                display: table-cell;
+                vertical-align: middle;
+                height: 40px;
+                padding-left: 30px;
+            }
 
             .lich-cong-tac .item .title a {
                 font-size: 13px;
                 vertical-align: central;
                 color: #fff;
-                font-weight:500;
+                font-weight: 500;
             }
+
 .sub-title {
     padding-left: 8px;
 }
-.sub-title a {
-    line-height: initial;
-    font-size: 12px;
-    font-weight: 500;
+
+    .sub-title a {
+        line-height: initial;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+.ban-do iframe {
+    width: 100%;
+    height: 150px;
 }
-.ban-do iframe{
-    width:100%;
-    height:150px;
+
+.page-content .item .title {
+    font-weight: 500;
 }

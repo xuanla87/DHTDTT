@@ -11,17 +11,23 @@
                 Lịch công tác
             </div>
             <div class="lich-cong-tac">
-                @foreach (var item in Model)
-                {
-                    <div class="item">
-                        <div class="title">
-                            <a href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-3">
+                            <div class="item">
+                                <div class="title">
+                                    <div class="text">
+                                        @item.contentName
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    @Html.Action("childrenLichCongTac", "Home", new { Id = item.contentId })
+                                </div>
+                            </div>
                         </div>
-                        <div class="body">
-                            @Html.Action("childrenLichCongTac", "Home", new { Id = item.contentId })
-                        </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>

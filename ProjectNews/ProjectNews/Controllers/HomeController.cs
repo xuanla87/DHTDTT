@@ -87,7 +87,7 @@ namespace ProjectNews.Controllers
                 var model = _services.GetById((int)entity.contentParentId.Value);
                 if (model != null)
                 {
-                    ViewBag.PTitle = "<a href=\"" + model.contentAlias + "\">" + model.contentName + "</a>";
+                    ViewBag.PTitle = getParent(model.contentParentId) + "<a href=\"" + model.contentAlias + "\">" + model.contentName + "</a> >> " + entity.contentName;
                 }
             }
             else if (entity != null)
@@ -199,7 +199,7 @@ namespace ProjectNews.Controllers
         public ActionResult getBanDo()
         {
             string _footer = _configSystemServices.GetValueByKey("BanDo");
-            ViewBag.Footer = "<div class=\"col-lg-3 ban-do\">" + _footer + "</div>";
+            ViewBag.Footer = "<div class=\"col-lg-3 ban-do item\">" + _footer + "</div>";
             return PartialView();
         }
 
@@ -336,7 +336,7 @@ namespace ProjectNews.Controllers
         public ActionResult LichCongTacChildren(int Id, string _url, int? _pageIndex)
         {
             int _totalRecord = 0;
-            var entity = _services.GetThongBao(null, null, null, Id, "LICHCONGTAC", 1, false, true, _pageIndex, 10);
+            var entity = _services.GetAll(null, null, null, Id, "LICHCONGTAC", 1, false, _pageIndex, 10);
             _pageIndex = _pageIndex ?? 1;
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
@@ -359,6 +359,24 @@ namespace ProjectNews.Controllers
             var entitys = _services.GetAll(null, null, null, Id, "CHUYENMUCTINTUC", 1, false, null, null);
             ViewBag.ListItem = entitys.ViewContents.OrderBy(x => x.isSort).ToList();
             return PartialView(entity.ViewContents);
+        }
+
+        public string getParent(long? Id)
+        {
+            string _outHtml = "";
+            if (Id.HasValue && Id.Value > 0)
+            {
+                var model = _services.GetById((int)Id.Value);
+                _outHtml += getParent(model.contentParentId);
+                if (!string.IsNullOrEmpty(_outHtml))
+                    _outHtml += " >> ";
+                _outHtml += "<a href=\"" + model.contentAlias + "\">" + model.contentName + "</a> >> ";
+                return _outHtml;
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }

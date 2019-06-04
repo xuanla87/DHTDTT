@@ -1,23 +1,25 @@
 ﻿@model IEnumerable<ServiceNews.Models.Content>
 @{
-    /**/
+                /**/
 
-    int ipage = 1;
-    if (ViewBag.PageIndex != null)
-    {
-        ipage = (int)ViewBag.PageIndex;
-    }
-    int totalPage = 1;
-    if (ViewBag.TotalPage != null)
-    {
-        totalPage = (int)ViewBag.TotalPage;
-    }
-    int firstPaging = ipage - 2;
-    int lastPaging = ipage + 2;
-    firstPaging = firstPaging <= 0 ? 1 : firstPaging;
-    lastPaging = lastPaging - firstPaging < 5 ? firstPaging + 4 : lastPaging;
-    lastPaging = lastPaging >= totalPage ? totalPage : lastPaging;
-    List<ServiceNews.Models.Content> _list = (List<ServiceNews.Models.Content>)ViewBag.ListItem;
+                /**/
+
+                int ipage = 1;
+                if (ViewBag.PageIndex != null)
+                {
+                    ipage = (int)ViewBag.PageIndex;
+                }
+                int totalPage = 1;
+                if (ViewBag.TotalPage != null)
+                {
+                    totalPage = (int)ViewBag.TotalPage;
+                }
+                int firstPaging = ipage - 2;
+                int lastPaging = ipage + 2;
+                firstPaging = firstPaging <= 0 ? 1 : firstPaging;
+                lastPaging = lastPaging - firstPaging < 5 ? firstPaging + 4 : lastPaging;
+                lastPaging = lastPaging >= totalPage ? totalPage : lastPaging;
+                List<ServiceNews.Models.Content> _list = (List<ServiceNews.Models.Content>)ViewBag.ListItem;
 }
 @if (_list != null && _list.Count > 0)
 {
@@ -40,15 +42,15 @@
         @foreach (var item in Model)
         {
             <tr>
-                @if (!string.IsNullOrEmpty(item.no))
+                @if (!string.IsNullOrEmpty(item.contentDescription))
                 {
-                    <td class="text-left" valign="middle">@item.no</td>
+                    <td class="text-left" valign="middle">@item.contentDescription</td>
                 }
                 else
                 {
-                    <td class="text-left" valign="middle">@item.note</td>
+                    <td class="text-left" valign="middle">@item.contentDescription</td>
                 }
-                <td class="text-center" valign="middle">@item.ngayBanHanh</td>
+                <td class="text-center" valign="middle">@item.contentUpdateTime.ToString("dd/MM/yyyy")</td>
                 <td class="text-left"><a href="@item.contentAlias">@item.contentName</a></td>
             </tr>
         }
@@ -77,7 +79,7 @@
                             {
                                 cssClass = "active";
                             }
-                            <li class="@cssClass"><a href="@ViewBag.CurentUrl?_pageIndex=@i">@i</a></li>
+                            <li class="@cssClass"><a href="@ViewBag.CurentUrl?_pageIndex=@i">@</a></li>
                         }
                         @if (lastPaging < totalPage)
                         {
