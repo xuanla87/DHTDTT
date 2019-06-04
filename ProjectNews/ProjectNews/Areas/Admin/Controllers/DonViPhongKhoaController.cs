@@ -117,7 +117,6 @@ namespace ProjectNews.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 Content entity = _services.GetById((int)model.DonViId);
-                entity.contentAlias = model.Link;
                 entity.contentUpdateTime = DateTime.Now;
                 entity.contentParentId = model.DonviCha;
                 entity.contentName = model.TenDonVi;
