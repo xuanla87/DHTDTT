@@ -327,13 +327,13 @@ namespace ProjectNews.Controllers
             return View(entity.ViewContents.Where(x => x.contentParentId == null).OrderByDescending(x => x.contentCreateTime));
         }
 
-        public ActionResult childenLichCongTac(int Id)
+        public ActionResult childrenLichCongTac(int Id)
         {
             var entity = _services.GetAll(null, null, null, Id, "DONVIPHONGKHOA", 1, false, null, null);
             return PartialView(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
         }
 
-        public ActionResult LichCongTacChilden(int Id, string _url, int? _pageIndex)
+        public ActionResult LichCongTacChildren(int Id, string _url, int? _pageIndex)
         {
             int _totalRecord = 0;
             var entity = _services.GetThongBao(null, null, null, Id, "LICHCONGTAC", 1, false, true, _pageIndex, 10);
