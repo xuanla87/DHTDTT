@@ -101,7 +101,7 @@ namespace ProjectNews.Controllers
         {
             string _banner = _configSystemServices.GetValueByKey("SiteBanner");
             if (!string.IsNullOrEmpty(_banner))
-                ViewBag.Banner = "<a href=\"/\"><img src=\"" + _banner + "\" alt=\"banner\" /></a>";
+                ViewBag.Banner = "<a class=\"bannermain\" href=\"/\"><img src=\"" + _banner + "\" alt=\"banner\" /></a>";
             else
                 ViewBag.Banner = "";
             return PartialView();
@@ -179,8 +179,8 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxMedia"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null);
-            return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime));
+            var eSlider = _services.GetAll(null, null, null, Id, "MEDIA", 1, false, null, null);
+            return PartialView(eSlider.ViewContents.OrderBy(x => x.isSort));
         }
 
         public ActionResult getThongBao()

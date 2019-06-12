@@ -57,12 +57,13 @@ namespace ProjectNews.Areas.Admin.Controllers
             var enMenu = _menuService.Dropdownlist(0, null, 1);
             var enTinTuc = _contentService.Dropdownlist(0, null, "CHUYENMUCTINTUC", 1);
             var enBanner = _contentService.Dropdownlist(0, null, "BANNER", 1);
+            var enMedia = _contentService.Dropdownlist(0, null, "CHUYENMUCMEDIA", 1);
             ViewBag.DanhMucChinh = enMenu.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.DanhMucPhai = enMenu.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BoxTinTucChung = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BoxTinTucNganh = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BoxPhongSuAnh = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
-            ViewBag.BoxMedia = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.BoxMedia = enMedia.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.SachVaHocLieu = enTinTuc.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BoxSlider = enBanner.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BoxBanner = enBanner.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });

@@ -1,6 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Danh sách văn bản";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Chuyên mục media";
     int ipage = 1;
     if (ViewBag.PageIndex != null)
     {
@@ -20,12 +20,12 @@
     int count = (ipage - 1) * 20;
 }
 @using ProjectNews.Areas.Admin.Models
-@model IEnumerable<ModelTaiLieu>
+@model IEnumerable<ModelChuyenMuc>
 <section class="content-header">
     <h1 class="title text-uppercase text-bold">@ViewBag.Title</h1>
     <ol class="breadcrumb">
-        <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li><a href="/Admin/TaiLieu">Quản lý văn bản</a></li>
+        <li><a href="/"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li><a href="/Admin/Media/Category">Chuyên mục media</a></li>
         <li class="active">@ViewBag.Title</li>
     </ol>
 </section>
@@ -33,43 +33,34 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                @using (Html.BeginForm("Index", "TaiLieu", FormMethod.Get, new { @id = "van-ban-list" }))
+                @using (Html.BeginForm("Category", "Media", FormMethod.Get, new { @id = "categories-list" }))
                 {
                     <div class="box-body">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <input type="text" name="_searchKey" value="@ViewBag.SearchKey" class="form-control" placeholder="Nhập từ khóa.." />
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     @Html.DropDownList("_parentId", null, "--Chuyên mục--", new { @class = "form-control" })
-                                </div>
-                                <div class="col-md-2">
-
-                                    <input type="text" name="_fromDate" value="@ViewBag.FromDate" class="form-control datepicker" placeholder="Từ ngày.." />
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" name="_toDate" value="@ViewBag.ToDate" class="form-control datepicker" placeholder="Đến ngày.." />
                                 </div>
                                 <div class="col-md-2 text-right">
                                     <button type="button" class="btn btn-danger search btn-flat"><i class="fa fa-filter"></i> Lọc</button>
-                                    <button type="button" class="btn btn-info btn-flat" onclick="refresh('TaiLieu')"><i class="fa fa-refresh"></i> Hủy</button>
+                                    <button type="button" class="btn btn-info btn-flat" onclick="refresh('TaiLieu/Category')"><i class="fa fa-refresh"></i> Hủy</button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <a href="@Url.Action("Detail", "TaiLieu")" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
+                            <a href="@Url.Action("DetailCategory", "Media", new { ParentId = ViewBag.Parent })" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th width="50">STT</th>
-                                        <th width="90">Số kí hiệu</th>
-                                        <th>Ngày ban hành</th>
-                                        <th width="350">Tên văn bản</th>
-                                        <th width="150">Link</th>
-                                        <th>Chuyên mục</th>
+                                        <th width="350">Tên chuyên mục</th>
+                                        <th width="350">Link chuyên mục</th>
+                                        <th>Chuyên mục cha</th>
                                         <th width="120">Thao tác</th>
                                     </tr>
                                 </thead>
@@ -80,14 +71,12 @@
                                         count++;
                                         <tr>
                                             <td class="text-center">@count</td>
-                                            <td>@item.Note</td>
-                                            <td>@item.CreateTime</td>
                                             <td>@item.Name</td>
-                                            <td>@item.Alias</td>
-                                            <td>@item.ParentName</td>
+                                            <td>@item.Link</td>
+                                            <td>@item.ParentId</td>
                                             <td>
-                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "TaiLieu", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
-                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','TaiLieu')"><i class="fa fa-trash"></i></button>
+                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("DetailCategory", "Media", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','Media/Category')"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     }
@@ -101,7 +90,7 @@
                                     @if (firstPaging > 1)
                                     {
                                         <li>
-                                            <a href="#" aria-label="Previous" onclick="moveToPreviousPage(@ipage, 'van-ban-list')">
+                                            <a href="#" aria-label="Previous" onclick="moveToPreviousPage(@ipage, 'categories-list')">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
@@ -113,12 +102,12 @@
                                         {
                                             cssClass = "active";
                                         }
-                                        <li class="@cssClass"><a href="#" onclick="moveToPage(@i, 'van-ban-list')">@i</a></li>
+                                        <li class="@cssClass"><a href="#" onclick="moveToPage(@i, 'categories-list')">@i</a></li>
                                     }
                                     @if (lastPaging < totalPage)
                                     {
                                         <li>
-                                            <a href="#" aria-label="Next" onclick="moveToNextPage(@ipage, 'van-ban-list')">
+                                            <a href="#" aria-label="Next" onclick="moveToNextPage(@ipage, 'categories-list')">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>

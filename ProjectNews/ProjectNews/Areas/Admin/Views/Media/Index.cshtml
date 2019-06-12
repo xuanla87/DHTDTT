@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Danh sách văn bản";
+    ViewBag.Title = "Danh sách media";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     int ipage = 1;
     if (ViewBag.PageIndex != null)
@@ -20,12 +20,12 @@
     int count = (ipage - 1) * 20;
 }
 @using ProjectNews.Areas.Admin.Models
-@model IEnumerable<ModelTaiLieu>
+@model IEnumerable<ModelMedia>
 <section class="content-header">
     <h1 class="title text-uppercase text-bold">@ViewBag.Title</h1>
     <ol class="breadcrumb">
         <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li><a href="/Admin/TaiLieu">Quản lý văn bản</a></li>
+        <li><a href="/Admin/Media">Quản lý media</a></li>
         <li class="active">@ViewBag.Title</li>
     </ol>
 </section>
@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                @using (Html.BeginForm("Index", "TaiLieu", FormMethod.Get, new { @id = "van-ban-list" }))
+                @using (Html.BeginForm("Index", "Media", FormMethod.Get, new { @id = "media-list" }))
                 {
                     <div class="box-body">
                         <div class="form-group">
@@ -53,21 +53,20 @@
                                 </div>
                                 <div class="col-md-2 text-right">
                                     <button type="button" class="btn btn-danger search btn-flat"><i class="fa fa-filter"></i> Lọc</button>
-                                    <button type="button" class="btn btn-info btn-flat" onclick="refresh('TaiLieu')"><i class="fa fa-refresh"></i> Hủy</button>
+                                    <button type="button" class="btn btn-info btn-flat" onclick="refresh('Media')"><i class="fa fa-refresh"></i> Hủy</button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <a href="@Url.Action("Detail", "TaiLieu")" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
+                            <a href="@Url.Action("Detail", "Media")" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th width="50">STT</th>
-                                        <th width="90">Số kí hiệu</th>
+                                        <th width="350">Tiêu đề</th>
                                         <th>Ngày ban hành</th>
-                                        <th width="350">Tên văn bản</th>
                                         <th width="150">Link</th>
                                         <th>Chuyên mục</th>
                                         <th width="120">Thao tác</th>
@@ -80,14 +79,13 @@
                                         count++;
                                         <tr>
                                             <td class="text-center">@count</td>
-                                            <td>@item.Note</td>
                                             <td>@item.CreateTime</td>
                                             <td>@item.Name</td>
                                             <td>@item.Alias</td>
                                             <td>@item.ParentName</td>
                                             <td>
-                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "TaiLieu", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
-                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','TaiLieu')"><i class="fa fa-trash"></i></button>
+                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "Media", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','Media')"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     }
@@ -101,7 +99,7 @@
                                     @if (firstPaging > 1)
                                     {
                                         <li>
-                                            <a href="#" aria-label="Previous" onclick="moveToPreviousPage(@ipage, 'van-ban-list')">
+                                            <a href="#" aria-label="Previous" onclick="moveToPreviousPage(@ipage, 'media-list')">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
@@ -113,12 +111,12 @@
                                         {
                                             cssClass = "active";
                                         }
-                                        <li class="@cssClass"><a href="#" onclick="moveToPage(@i, 'van-ban-list')">@i</a></li>
+                                        <li class="@cssClass"><a href="#" onclick="moveToPage(@i, 'media-list')">@i</a></li>
                                     }
                                     @if (lastPaging < totalPage)
                                     {
                                         <li>
-                                            <a href="#" aria-label="Next" onclick="moveToNextPage(@ipage, 'van-ban-list')">
+                                            <a href="#" aria-label="Next" onclick="moveToNextPage(@ipage, 'media-list')">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>
