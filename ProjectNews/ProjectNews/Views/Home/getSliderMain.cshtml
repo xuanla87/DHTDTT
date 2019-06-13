@@ -15,6 +15,11 @@
                         <a href="@item.contentDescription">
                             <img src="@item.contentThumbnail" alt="@item.contentName">
                         </a>
+                        <div class="caption">
+                            <a href="@item.contentDescription">
+                                @Html.Raw(item.contentBody)
+                            </a>
+                        </div>
                     </div>
                 }
                 else
@@ -23,6 +28,11 @@
                         <a href="@item.contentDescription">
                             <img src="@item.contentThumbnail" alt="@item.contentName">
                         </a>
+                        <div class="caption">
+                            <a href="@item.contentDescription">
+                                @Html.Raw(item.contentBody)
+                            </a>
+                        </div>
                     </div>
                 }
             }

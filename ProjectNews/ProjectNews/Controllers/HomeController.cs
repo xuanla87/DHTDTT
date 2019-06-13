@@ -146,6 +146,7 @@ namespace ProjectNews.Controllers
             var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null);
             var entity = _services.GetById(Id);
             ViewBag.Readmore = "<a href=\"" + entity.contentAlias + "\">>>>>Xem thêm</a>";
+            ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(6));
         }
 
@@ -156,6 +157,7 @@ namespace ProjectNews.Controllers
             var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null);
             var entity = _services.GetById(Id);
             ViewBag.Readmore = "<a href=\"" + entity.contentAlias + "\">>>>>Xem thêm</a>";
+            ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(5));
         }
 
@@ -164,6 +166,8 @@ namespace ProjectNews.Controllers
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxSachVaHocLieu"), out Id);
             var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null);
+            var entity = _services.GetById(Id);
+            ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(1));
         }
 
@@ -172,6 +176,8 @@ namespace ProjectNews.Controllers
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxPhongSuAnh"), out Id);
             var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null);
+            var entity = _services.GetById(Id);
+            ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime));
         }
 
@@ -180,6 +186,8 @@ namespace ProjectNews.Controllers
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxMedia"), out Id);
             var eSlider = _services.GetAll(null, null, null, Id, "MEDIA", 1, false, null, null);
+            var entity = _services.GetById(Id);
+            ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderBy(x => x.isSort));
         }
 
