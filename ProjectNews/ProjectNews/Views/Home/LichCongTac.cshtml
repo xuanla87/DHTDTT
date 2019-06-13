@@ -18,11 +18,12 @@
                             <div class="item">
                                 <div class="title">
                                     <div class="text">
-                                        @item.contentName
+                                        <a href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
                                     </div>
                                 </div>
                                 <div class="body">
                                     @Html.Action("childrenLichCongTac", "Home", new { Id = item.contentId })
+                                    @Html.Action("LichCongTacChildren2", "Home", new { Id = item.contentId })
                                 </div>
                             </div>
                         </div>

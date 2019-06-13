@@ -354,6 +354,16 @@ namespace ProjectNews.Controllers
             return PartialView(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
         }
 
+        public ActionResult LichCongTacChildren2(int Id)
+        {
+            int _totalRecord = 0;
+            var entity = _services.GetAll(null, null, null, Id, "LICHCONGTAC", 1, false, 1, 5);
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            return PartialView(entity.ViewContents);
+        }
+
         public ActionResult ViewVanBan(int Id, string _url, int? _pageIndex)
         {
             int _totalRecord = 0;
