@@ -492,5 +492,12 @@ footer {
 
 .media .item iframe {
     width: 100% !important;
-    height: auto;
+    height: 300px;
+}
+
+.media .item .des {
+    font-weight: 500;
+    text-align: justify;
+    font-size: 11px;
+    color: #404040;
 }
