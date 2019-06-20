@@ -208,6 +208,33 @@ a.title {
         opacity: 1;
     }
 
+#slider-phong-su-anh .caption {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 5px;
+    background: #404040;
+    color: #fff;
+    opacity: 0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+    #slider-phong-su-anh .caption a {
+        color: #fff;
+    }
+
+        #slider-phong-su-anh .caption a:hover {
+            text-decoration: none;
+        }
+
+#slider-phong-su-anh .item:hover .caption {
+    opacity: 1;
+}
+
 .slider-left {
     width: 100%;
     height: 335px;
@@ -394,7 +421,7 @@ footer {
 
 .search-header {
     position: absolute;
-    top: 100px;
+    top: 130px;
     width: 200px;
     right: 80px;
 }
@@ -476,14 +503,33 @@ footer {
     height: 150px;
 }
 
-.page-content .item a {
-    font-weight: 600;
+.page-content {
+    border: 1px solid #ddd;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+    padding: 15px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 
-    .page-content .item a:hover {
-        text-decoration: none;
-        color: #b7250c;
+    .page-content .item {
+        border-bottom: 1px solid #ddd;
+        -webkit-transition: border .2s ease-in-out;
+        -o-transition: border .2s ease-in-out;
+        transition: border .2s ease-in-out;
+        margin-bottom: 10px;
     }
+
+        .page-content .item a {
+            font-weight: 600;
+        }
+
+            .page-content .item a:hover {
+                text-decoration: none;
+                color: #b7250c;
+            }
 
 .item .des {
     font-size: 13px;
