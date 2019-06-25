@@ -21,6 +21,7 @@
         Content UnTrash(int _id);
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
+        ContentView GetAllAdmin(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
         IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
 
@@ -58,15 +59,11 @@
         }
         public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value);
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey);
 
             if (!string.IsNullOrEmpty(_keyWords))
             {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || x.contentAlias.Contains(_keyWords.ToLower().Trim()));
-            }
-            if (!string.IsNullOrEmpty(_contentKey))
-            {
-                enContent = enContent.Where(x => x.contentKey== _contentKey);
             }
             if (_isTrash.HasValue)
             {
@@ -85,6 +82,45 @@
                 enContent = enContent.Where(x => x.contentUpdateTime.Date <= _toDate.Value.Date);
             }
             enContent = enContent.OrderByDescending(x => x.contentCreateTime);
+            int totalRecord = enContent.Count();
+            if (_pageIndex != null && _pageSize != null)
+            {
+                enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
+            }
+            var totalPage = 0;
+            if (_pageSize != null)
+            {
+                totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
+                enContent = enContent.Take(_pageSize.Value);
+            }
+            return new ContentView { ViewContents = enContent, Total = totalPage, TotalRecord = totalRecord };
+        }
+
+        public ContentView GetAllAdmin(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
+        {
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey);
+
+            if (!string.IsNullOrEmpty(_keyWords))
+            {
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || x.contentAlias.Contains(_keyWords.ToLower().Trim()));
+            }
+            if (_isTrash.HasValue)
+            {
+                enContent = enContent.Where(x => x.isTrash == _isTrash);
+            }
+            if (_parentId.HasValue)
+            {
+                enContent = enContent.Where(x => x.contentParentId == _parentId);
+            }
+            if (_fromDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.contentUpdateTime.Date >= _fromDate.Value.Date);
+            }
+            if (_toDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.contentUpdateTime.Date <= _toDate.Value.Date);
+            }
+            enContent = enContent.OrderBy(x => x.contentParentId);
             int totalRecord = enContent.Count();
             if (_pageIndex != null && _pageSize != null)
             {

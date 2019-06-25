@@ -152,5 +152,20 @@ namespace ProjectNews.Areas.Admin.Controllers
             ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(model);
         }
+
+        public string getNameById(long? Id)
+        {
+            if (Id.HasValue)
+            {
+                var entity = _services.GetById((int)Id);
+                if (entity != null)
+                    return entity.contentName;
+                else
+                    return null;
+            }
+            else
+                return null;
+
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace ProjectNews.Areas.Admin.Controllers
         public ActionResult Index(string _searchKey, int? _parentId, int? _pageIndex)
         {
             ContentView result;
-            result = _services.GetAll(_searchKey, null, null, _parentId, "CHUYENMUCTINTUC", 1, false, _pageIndex, 20);
+            result = _services.GetAllAdmin(_searchKey, null, null, _parentId, "CHUYENMUCTINTUC", 1, false, _pageIndex, 20);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;
@@ -153,6 +153,21 @@ namespace ProjectNews.Areas.Admin.Controllers
             IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)model.Id, "CHUYENMUCTINTUC", 1);
             ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(model);
+        }
+
+        public string getNameById(long? Id)
+        {
+            if (Id.HasValue)
+            {
+                var entity = _services.GetById((int)Id);
+                if (entity != null)
+                    return entity.contentName;
+                else
+                    return null;
+            }
+            else
+                return null;
+
         }
     }
 }

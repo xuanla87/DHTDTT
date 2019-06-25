@@ -70,17 +70,17 @@
                                     foreach (var item in Model)
                                     {
                                         count++;
-                                        <tr>
-                                            <td class="text-center">@count</td>
-                                            <td>@item.Name</td>
-                                            <td>@item.Link</td>
-                                            <td>@item.ParentId</td>
-                                            <td>@item.isSort</td>
-                                            <td>
-                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("CapNhat", "DanhMuc", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
-                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trashMenu('@item.Id')"><i class="fa fa-trash"></i></button>
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td class="text-center">@count</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Link</td>
+                                    <td>@Html.Action("getNameById", new { Id = item.ParentId })</td>
+                                    <td>@item.isSort</td>
+                                    <td>
+                                        <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("CapNhat", "DanhMuc", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                        <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trashMenu('@item.Id')"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </table>

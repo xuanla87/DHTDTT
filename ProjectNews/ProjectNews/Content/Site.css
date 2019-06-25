@@ -283,39 +283,36 @@ footer {
     border-right: 2px solid #fff;
 }
 
-.box {
+.box .title {
+    background: #8dd8f7;
+    font-size: 14px;
+    font-weight: 600;
+    color: #294da1;
 }
 
-    .box .title {
-        background: #8dd8f7;
-        font-size: 14px;
-        font-weight: 600;
-        color: #294da1;
+    .box .title h2 {
+        margin: 0px;
     }
 
-        .box .title h2 {
-            margin: 0px;
+        .box .title h2 .icon {
+            margin-left: 20px;
+            line-height: 40px;
+            float: left;
+            color: #f16e20;
         }
 
-            .box .title h2 .icon {
-                margin-left: 20px;
-                line-height: 40px;
-                float: left;
-                color: #f16e20;
-            }
+        .box .title h2 > a {
+            font-size: 14px;
+            line-height: 40px;
+            text-transform: uppercase;
+            margin-left: 20px;
+            font-weight: 600;
+            color: #294da1;
+        }
 
-            .box .title h2 > a {
-                font-size: 14px;
-                line-height: 40px;
-                text-transform: uppercase;
-                margin-left: 20px;
-                font-weight: 600;
-                color: #294da1;
+            .box .title h2 > a:hover {
+                text-decoration: none;
             }
-
-                .box .title h2 > a:hover {
-                    text-decoration: none;
-                }
 
 .pading-left-20 {
     padding-left: 20px;
@@ -452,41 +449,40 @@ footer {
     color: #f16e20 !important;
 }
 
-.lich-cong-tac {
+
+
+.lich-cong-tac .item {
+    border: 1px solid #294da1;
+    box-sizing: border-box;
+    margin-bottom: 5px;
 }
 
-    .lich-cong-tac .item {
-        border: 1px solid #294da1;
-        box-sizing: border-box;
-        margin-bottom: 5px;
+    .lich-cong-tac .item .body {
+        height: 200px;
+        overflow: auto;
     }
 
-        .lich-cong-tac .item .body {
-            height: 200px;
-            overflow: auto;
+    .lich-cong-tac .item .title {
+        border-bottom: 1px solid #294da1;
+        background: #294da1;
+    }
+
+        .lich-cong-tac .item .title .text {
+            color: #fff;
+            display: table-cell;
+            vertical-align: middle;
+            height: 40px;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-align: center;
         }
 
-        .lich-cong-tac .item .title {
-            border-bottom: 1px solid #294da1;
-            background: #294da1;
+        .lich-cong-tac .item .title a {
+            font-size: 13px;
+            vertical-align: central;
+            color: #fff;
+            font-weight: 500;
         }
-
-            .lich-cong-tac .item .title .text {
-                color: #fff;
-                display: table-cell;
-                vertical-align: middle;
-                height: 40px;
-                padding-left: 10px;
-                padding-right: 10px;
-                text-align: center;
-            }
-
-            .lich-cong-tac .item .title a {
-                font-size: 13px;
-                vertical-align: central;
-                color: #fff;
-                font-weight: 500;
-            }
 
 .sub-title {
     padding-left: 8px;

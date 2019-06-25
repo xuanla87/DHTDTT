@@ -68,8 +68,8 @@ namespace ProjectNews.Controllers
             var entity = _services.GetByAlias(_link);
             if (entity != null)
             {
-                var model = _services.GetAll(null, null, null, (int)entity.contentId, null, 1, false, null, null);
-                return PartialView(model);
+                var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null);
+                return PartialView(model.ViewContents);
             }
             else
             {
