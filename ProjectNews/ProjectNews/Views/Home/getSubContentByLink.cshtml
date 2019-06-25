@@ -1,0 +1,16 @@
+﻿@using ServiceNews.Models
+@model IEnumerable<Content>
+@if (Model != null && Model.Count() > 0)
+{
+    <ul class="sub-menu nav">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@item.contentAlias">@item.contentName</a>
+                @Html.Action("getSubContentByLink", "Home", new { _link = item.contentAlias })
+            </li>
+        }
+    </ul>
+}
+
+

@@ -63,6 +63,21 @@ namespace ProjectNews.Controllers
             return PartialView(eMenus);
         }
 
+        public ActionResult getSubContentByLink(string _link)
+        {
+            var entity = _services.GetByAlias(_link);
+            if (entity != null)
+            {
+                var model = _services.GetAll(null, null, null, (int)entity.contentId, null, 1, false, null, null);
+                return PartialView(model);
+            }
+            else
+            {
+                var model = new List<Content>();
+                return PartialView(model);
+            }
+        }
+
         public ActionResult getDanhMucPhai()
         {
             int _languageId = 1;
