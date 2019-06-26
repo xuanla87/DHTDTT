@@ -69,7 +69,7 @@ namespace ProjectNews.Controllers
             if (entity != null)
             {
                 var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null);
-                return PartialView(model.ViewContents);
+                return PartialView(model.ViewContents.OrderBy(x=>x.isSort));
             }
             else
             {
