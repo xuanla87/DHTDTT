@@ -356,6 +356,12 @@ footer {
         opacity: 1;
     }
 
+.main-nav .sub-menu li .sub-menu {
+    position: absolute;
+    top: 0px;
+    left: 250px;
+}
+
 .breadcrumb {
     border-radius: inherit;
     background: #8dd8f7;

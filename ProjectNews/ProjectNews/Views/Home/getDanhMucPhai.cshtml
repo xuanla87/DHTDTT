@@ -13,14 +13,14 @@
                 {
                     <li class="active">
                         <a href="@item.menuLink">@item.menuName</a>
-                        @Html.Action("getSubMenu", "Home", new { Id = item.menuId })
+                        @Html.Action("getSubContentByLink", "Home", new { _link = item.menuLink })
                     </li>
                 }
                 else
                 {
                     <li>
                         <a href="@item.menuLink">@item.menuName</a>
-                        @Html.Action("getSubMenu", "Home", new { Id = item.menuId })
+                        @Html.Action("getSubContentByLink", "Home", new { _link = item.menuLink })
                     </li>
                 }
 
