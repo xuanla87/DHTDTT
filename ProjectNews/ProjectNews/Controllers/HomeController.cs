@@ -69,7 +69,7 @@ namespace ProjectNews.Controllers
             if (entity != null)
             {
                 var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null);
-                return PartialView(model.ViewContents.OrderBy(x=>x.isSort));
+                return PartialView(model.ViewContents.OrderBy(x => x.isSort));
             }
             else
             {
@@ -257,9 +257,26 @@ namespace ProjectNews.Controllers
             return PartialView();
         }
 
-        public ActionResult Search(string searchKey, int? pageIndex)
+        public ActionResult Search(string searchKey, int? _pageIndex)
         {
-            return View();
+            if (string.IsNullOrEmpty(searchKey))
+            {
+                var entity = new ContentView();
+                return View(entity.ViewContents);
+            }
+            else
+            {
+                int _totalRecord = 0;
+                _pageIndex = _pageIndex ?? 1;
+                var entity = _services.GetAll(searchKey, null, null, null, "TINTUC", 1, false, _pageIndex, 10);
+                _totalRecord = entity.TotalRecord;
+                ViewBag.TotalRecord = _totalRecord.ToString();
+                ViewBag.TotalPage = entity.Total;
+                ViewBag.PageIndex = _pageIndex ?? 1;
+                ViewBag.SearchKey = searchKey;
+                return View(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
+            }
+           
         }
 
         public ActionResult getChildDisplay(int Id, string _url, int? _pageIndex)
