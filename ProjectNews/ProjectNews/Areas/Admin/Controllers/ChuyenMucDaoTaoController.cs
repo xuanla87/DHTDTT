@@ -79,7 +79,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     contentMetaDescription = model.MetaDescription,
                     contentName = model.Name,
                     contentCreateTime = DateTime.Now,
-                    isSort = 1,
+                    isSort = model.Isort,
                     isTrash = false,
                     contentView = 0,
                     contentLanguageId = 1,
@@ -114,6 +114,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     MetaKeywords = entity.contentMetaKeywords,
                     MetaTitle = entity.contentMetaTitle,
                     Name = entity.contentName,
+                    Isort = entity.isSort,
                     Note = entity.contentDescription,
                     ParentId = entity.contentParentId,
                     Thumbnail = entity.contentThumbnail
@@ -144,6 +145,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 entity.contentName = model.Name;
                 entity.contentMetaKeywords = model.MetaKeywords;
                 entity.contentUpdateUser = User.Identity.Name;
+                entity.isSort = model.Isort;
                 _services.Update(entity);
                 _services.Save();
                 return RedirectToAction("Index", new { _parentId = entity.contentParentId });

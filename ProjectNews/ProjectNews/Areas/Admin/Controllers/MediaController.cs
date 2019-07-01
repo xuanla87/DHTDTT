@@ -1,6 +1,5 @@
 ﻿using ServiceNews.Services;
 using ServiceNews.Models;
-using ServiceNews.Services;
 using ProjectNews.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
@@ -221,6 +220,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     MetaDescription = model.contentMetaDescription,
                     MetaKeywords = model.contentMetaKeywords,
                     MetaTitle = model.contentMetaTitle,
+                    Isort = model.isSort,
                     Name = model.contentName,
                     Note = model.contentDescription,
                     ParentId = model.contentParentId,
@@ -260,6 +260,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     model.contentParentId = entity.ParentId;
                     model.contentMetaDescription = entity.MetaDescription;
                     model.contentName = entity.Name;
+                    model.isSort = entity.Isort;
                     model.contentMetaKeywords = entity.MetaKeywords;
                     model.contentUpdateUser = User.Identity.Name;
                     _services.Update(model);
@@ -278,7 +279,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                         contentMetaDescription = entity.MetaDescription,
                         contentName = entity.Name,
                         contentCreateTime = DateTime.Now,
-                        isSort = 1,
+                        isSort = entity.Isort,
                         isTrash = false,
                         contentView = 0,
                         contentLanguageId = 1,

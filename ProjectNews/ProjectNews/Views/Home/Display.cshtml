@@ -10,7 +10,7 @@
             <div class="breadcrumb">
                 @Html.Action("getBreadcrumb", "Home", new { pageUrl = Model.contentAlias })
             </div>
-            @if (Model.contentKey.StartsWith("CHUYENMUC"))
+            @if (Model.contentKey.StartsWith("CHUYENMUCTINTUC"))
             {
                 <div class="page-content">
                     @Html.Action("getChildDisplay", "Home", new { Id = Model.contentId, _url = Model.contentAlias })

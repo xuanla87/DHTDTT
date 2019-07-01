@@ -69,7 +69,8 @@ namespace ProjectNews.Controllers
             if (entity != null)
             {
                 var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null);
-                return PartialView(model.ViewContents.OrderBy(x => x.isSort));
+                var List = model.ViewContents.OrderBy(x => x.isSort);
+                return PartialView(List);
             }
             else
             {
@@ -276,7 +277,7 @@ namespace ProjectNews.Controllers
                 ViewBag.SearchKey = searchKey;
                 return View(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
             }
-           
+
         }
 
         public ActionResult getChildDisplay(int Id, string _url, int? _pageIndex)

@@ -18,5 +18,6 @@ namespace ProjectNews.Areas.Admin.Models
         public string MetaTitle { get; set; }
         public string Note { get; set; }
         public string Thumbnail { get; set; }
+        public int Isort { get; set; }
     }
 }

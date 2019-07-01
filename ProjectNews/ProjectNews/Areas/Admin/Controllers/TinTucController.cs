@@ -180,5 +180,18 @@ namespace ProjectNews.Areas.Admin.Controllers
                 return null;
 
         }
+
+        public ActionResult Trash(int Id)
+        {
+            if (Id > 0)
+            {
+                var entity = _services.Trash(Id);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

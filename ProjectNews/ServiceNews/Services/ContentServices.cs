@@ -59,8 +59,11 @@
         }
         public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey);
-
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value);
+            if (!string.IsNullOrEmpty(_contentKey))
+            {
+                enContent = enContent.Where(x => x.contentKey== _contentKey);
+            }
             if (!string.IsNullOrEmpty(_keyWords))
             {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || x.contentAlias.Contains(_keyWords.ToLower().Trim()));
@@ -81,7 +84,7 @@
             {
                 enContent = enContent.Where(x => x.contentUpdateTime.Date <= _toDate.Value.Date);
             }
-            enContent = enContent.OrderByDescending(x => x.contentCreateTime);
+            enContent = enContent.OrderBy(x => x.contentCreateTime);
             int totalRecord = enContent.Count();
             if (_pageIndex != null && _pageSize != null)
             {
