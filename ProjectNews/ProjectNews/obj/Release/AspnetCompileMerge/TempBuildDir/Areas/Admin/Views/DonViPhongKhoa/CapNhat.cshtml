@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Cập nhật đơn vị";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model  ProjectNews.Areas.Admin.Models.ModelDonVi
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/DonViPhongKhoa">Danh sách đơn vị</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm())
+                {
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Tên đơn vị", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.TenDonVi, new { @class = "form-control geturl", @autocomplete = "off", @placeholder = "Nhập tên..", @onchange = "javascript: Changed(this);" })
+                                    @Html.ValidationMessageFor(x => x.TenDonVi, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Đơn vị cha", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.DonviCha, null, "---Chọn---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.DonviCha, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Thứ tự", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.ThuTu, new { @class = "form-control number", @placeholder = "Nhập số.." })
+                                    @Html.ValidationMessageFor(x => x.ThuTu, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                @Html.HiddenFor(x => x.DonViId)
+                                @Html.HiddenFor(x => x.Link)
+                                <div class="col-md-2 text-right">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+@section scriptAs {
+    <script>
+        function Changed(textControl) {
+            document.getElementById('Link').value = geturl(textControl.value);
+            textControl.value = textControl.value.replace(/ + /g, " ");
+            textControl.value = textControl.value.replace(/^\ +|\ +$/g, "");
+        }
+    </script>
+}
+

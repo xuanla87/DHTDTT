@@ -81,6 +81,7 @@ namespace ProjectNews.Models
         public string ConfirmPassword { get; set; }
 
         public string FullName { get; set; }
+        public string[] RoleName { get; set; }
     }
 
     public class ResetPasswordViewModel

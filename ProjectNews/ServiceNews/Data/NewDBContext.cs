@@ -18,6 +18,8 @@
         public DbSet<Contact> Contacts { set; get; }
         public DbSet<Menu> Menus { set; get; }
         public DbSet<ConfigSystem> ConfigSystems { set; get; }
+        public DbSet<LogSystem> LogSystems { set; get; }
+        public DbSet<RoleFunction> RoleFunctions { set; get; }
         public static NewDbContext Create()
         {
             return new NewDbContext();

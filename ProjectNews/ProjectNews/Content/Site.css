@@ -134,10 +134,11 @@ a.title {
         max-width: 100%;
     }
 
-.decs p {
+.decs p, .decs p span, .decs p samp samp {
     text-align: justify;
     font-size: 11px;
     color: #404040;
+    font-family: 'Roboto', sans-serif;
 }
 
 .page-des {
@@ -535,7 +536,10 @@ footer {
 
 .item .des {
     font-size: 13px;
-    font-style: italic;
+}
+
+.item .decs {
+    font-weight: initial !important;
 }
 
 .media .item iframe {
@@ -548,4 +552,8 @@ footer {
     text-align: justify;
     font-size: 11px;
     color: #404040;
+}
+
+.carousel-control {
+    line-height: 337px;
 }

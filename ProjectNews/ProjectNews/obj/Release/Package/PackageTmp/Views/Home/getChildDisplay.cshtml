@@ -24,7 +24,10 @@
         if (string.IsNullOrEmpty(item.contentThumbnail))
         {
             <div class="item">
-                <a class="title" href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
+                <a href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
+                <div class="des">
+                    @Html.Raw(item.contentDescription)
+                </div>
             </div>
         }
         else
@@ -37,7 +40,7 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-8 col-xs-8 col-sm-12">
-                        <a class="title" href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
+                        <a href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
                         <div class="des">
                             @Html.Raw(item.contentDescription)
                         </div>

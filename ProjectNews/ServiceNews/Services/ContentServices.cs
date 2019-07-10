@@ -20,7 +20,11 @@
 
         Content UnTrash(int _id);
 
-        ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
+        Content Approval(int _id);
+
+        Content UnApproval(int _id);
+
+        ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize, string _userName);
         ContentView GetAllAdmin(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
         IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
@@ -40,29 +44,43 @@
     public class ContentServices : IContentServices
     {
         private IContentRepository _Repository;
+        private ILogSystemRepository _RepositoryLogSystem;
         private IUnitOfWork _unitOfWork;
 
-        public ContentServices(IContentRepository Repository, IUnitOfWork unitOfWork)
+        public ContentServices(IContentRepository Repository, ILogSystemRepository RepositoryLogSystem, IUnitOfWork unitOfWork)
         {
             this._Repository = Repository;
+            this._RepositoryLogSystem = RepositoryLogSystem;
             this._unitOfWork = unitOfWork;
         }
 
         public Content Add(Content _model)
         {
-            return _Repository.Add(_model);
+            _Repository.Add(_model);
+            LogSystem entity = new LogSystem();
+            entity.action = "Thêm mới nội dung:" + _model.contentId;
+            entity.browser = "";
+            entity.ipAddress = "";
+            entity.userAction = _model.contentCreateUser;
+            entity.createTime = DateTime.Now;
+            _RepositoryLogSystem.Add(entity);
+            return _model;
         }
 
         public Content Delete(int _id)
         {
             return _Repository.Delete((int)_id);
         }
-        public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
+        public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize, string _userName)
         {
             var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value);
+            if (!string.IsNullOrEmpty(_userName))
+            {
+                enContent = enContent.Where(x => x.contentCreateUser == _userName);
+            }
             if (!string.IsNullOrEmpty(_contentKey))
             {
-                enContent = enContent.Where(x => x.contentKey== _contentKey);
+                enContent = enContent.Where(x => x.contentKey == _contentKey);
             }
             if (!string.IsNullOrEmpty(_keyWords))
             {
@@ -214,10 +232,17 @@
             if (enContent != null && enContent.isTrash == false)
                 enContent.isTrash = true;
             _Repository.Update(enContent);
+            LogSystem entity = new LogSystem();
+            entity.action = "Xóa nội dung:" + enContent.contentId;
+            entity.browser = "";
+            entity.ipAddress = "";
+            entity.userAction = enContent.contentUpdateUser;
+            entity.createTime = DateTime.Now;
+            _RepositoryLogSystem.Add(entity);
             Save();
             return enContent;
         }
-
+        
         public Content UnTrash(int _id)
         {
             var enContent = _Repository.GetSingleById((int)_id);
@@ -228,6 +253,38 @@
             return enContent;
         }
 
+        public Content Approval(int _id)
+        {
+            var enContent = _Repository.GetSingleById((int)_id);
+            if (enContent != null && enContent.isApproval == true)
+                enContent.isTrash = true;
+            _Repository.Update(enContent);
+            LogSystem entity = new LogSystem();
+            entity.action = "Duyệt nội dung:" + enContent.contentId;
+            entity.browser = "";
+            entity.ipAddress = "";
+            entity.userAction = enContent.contentUpdateUser;
+            entity.createTime = DateTime.Now;
+            _RepositoryLogSystem.Add(entity);
+            Save();
+            return enContent;
+        }
+        public Content UnApproval(int _id)
+        {
+            var enContent = _Repository.GetSingleById((int)_id);
+            if (enContent != null && enContent.isApproval == false)
+                enContent.isTrash = true;
+            _Repository.Update(enContent);
+            LogSystem entity = new LogSystem();
+            entity.action = "Hủy duyệt nội dung:" + enContent.contentId;
+            entity.browser = "";
+            entity.ipAddress = "";
+            entity.userAction = enContent.contentUpdateUser;
+            entity.createTime = DateTime.Now;
+            _RepositoryLogSystem.Add(entity);
+            Save();
+            return enContent;
+        }
         public Content GetByAlias(string _alias)
         {
             if (!string.IsNullOrEmpty(_alias))
@@ -307,6 +364,13 @@
         public void Update(Content _model)
         {
             _Repository.Update(_model);
+            LogSystem entity = new LogSystem();
+            entity.action = "Sửa nội dung:" + _model.contentId;
+            entity.browser = "";
+            entity.ipAddress = "";
+            entity.userAction = _model.contentUpdateUser;
+            entity.createTime = DateTime.Now;
+            _RepositoryLogSystem.Add(entity);
         }
     }
 }

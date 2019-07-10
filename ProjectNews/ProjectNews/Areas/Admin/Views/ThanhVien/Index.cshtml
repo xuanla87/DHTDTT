@@ -39,6 +39,7 @@
                                             <td>@item.FullName</td>
                                             <td>
                                                 <a title="Cập nhật mật khẩu" class="btn btn-primary btn-flat" href="@Url.Action("ChangePass", "ThanhVien", new { Id = item.Id })"><i class="fa fa-key"></i> Đổi mật khẩu</a>
+                                                <a title="Phân quyền" class="btn btn-primary btn-flat" href="@Url.Action("Role", "ThanhVien", new { Id = item.Id })"><i class="fa fa-cube"></i> Phân quyền</a>
                                             </td>
                                         </tr>
                                     }

@@ -21,7 +21,7 @@ namespace ProjectNews.Areas.Admin.Controllers
         public ActionResult Index(string _searchKey, int? _parentId, DateTime? _fromDate, DateTime? _toDate, int? _pageIndex)
         {
             ContentView result;
-            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "DOCUMENT", 1, false, _pageIndex, 20);
+            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "DOCUMENT", 1, false, _pageIndex, 20, null);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;
@@ -36,7 +36,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 {
                     Alias = x.contentAlias,
                     BodyContent = x.contentBody,
-                    Id = (int)x.contentId,
+                    Id = x.contentId,
                     Img = x.contentThumbnail,
                     LanguageId = 1,
                     MetaDescription = x.contentDescription,
@@ -44,7 +44,8 @@ namespace ProjectNews.Areas.Admin.Controllers
                     MetaTitle = x.contentMetaTitle,
                     Name = x.contentName,
                     Note = x.contentDescription,
-                    ParentId = (int)x.contentParentId,
+                    ParentId = x.contentParentId,
+                    ParentName = getNameById(x.contentParentId),
                     CreateTime = x.contentUpdateTime.ToString("dd/MM/yyyy")
                 });
                 return View(model);
@@ -91,7 +92,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 };
                 ViewBag.Title = "Thêm mới văn bản";
             }
-            IEnumerable<DropdownModel> category = _services.Dropdownlist(0, entity.Id, "CHUYENMUCTAILIEU", 1);
+            IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)entity.Id, "CHUYENMUCTAILIEU", 1);
             ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(entity);
         }
@@ -105,7 +106,7 @@ namespace ProjectNews.Areas.Admin.Controllers
             {
                 if (entity.Id > 0)
                 {
-                    Content model = _services.GetById(entity.Id);
+                    Content model = _services.GetById((int)entity.Id);
                     model.contentAlias = entity.Alias;
                     model.contentBody = entity.BodyContent;
                     model.contentDescription = entity.MetaDescription;
@@ -167,7 +168,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index", new { _parentId = entity.ParentId });
             }
-            IEnumerable<DropdownModel> category = _services.Dropdownlist(0, entity.Id, "CHUYENMUCTAILIEU", 1);
+            IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)entity.Id, "CHUYENMUCTAILIEU", 1);
             ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(entity);
         }
@@ -175,7 +176,7 @@ namespace ProjectNews.Areas.Admin.Controllers
         public ActionResult Category(string _searchKey, int? _parentId, int? _pageIndex)
         {
             ContentView result;
-            result = _services.GetAll(_searchKey, null, null, _parentId, "CHUYENMUCTAILIEU", 1, false, _pageIndex, 20);
+            result = _services.GetAll(_searchKey, null, null, _parentId, "CHUYENMUCTAILIEU", 1, false, _pageIndex, 20, null);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;

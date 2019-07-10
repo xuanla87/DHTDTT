@@ -25,28 +25,28 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.Label("Email", new { @class = "control-lable" })
-                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Nhập email.." })
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Nhập email..", @autocomplete= "off" })
                                     @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.Label("Họ và tên", new { @class = "control-lable" })
-                                    @Html.TextBoxFor(x => x.FullName, new { @class = "form-control", @placeholder = "Nhập email.." })
+                                    @Html.TextBoxFor(x => x.FullName, new { @class = "form-control", @placeholder = "Nhập tên..", @autocomplete = "off" })
                                     @Html.ValidationMessageFor(x => x.FullName, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.Label("Mật khẩu", new { @class = "control-lable" })
-                                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Nhập mật khẩu.." })
+                                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Nhập mật khẩu..", @autocomplete = "off" })
                                     @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.Label("Nhâp lại mật khẩu", new { @class = "control-lable" })
-                                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Nhập mật khẩu.." })
+                                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Nhập mật khẩu..", @autocomplete = "off" })
                                     @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
                                 </div>
                             </div>

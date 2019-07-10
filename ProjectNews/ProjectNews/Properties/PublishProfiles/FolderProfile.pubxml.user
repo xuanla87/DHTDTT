@@ -223,37 +223,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2019 21:50:11</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Banner/Detail.cshtml">
-      <publishTime>05/19/2019 17:41:22</publishTime>
+      <publishTime>06/13/2019 23:06:26</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Banner/Index.cshtml">
       <publishTime>05/19/2019 17:41:08</publishTime>
     </File>
     <File Include="Areas/Admin/Views/CaiDatHeThong/Index.cshtml">
-      <publishTime>05/19/2019 23:20:46</publishTime>
+      <publishTime>06/03/2019 20:14:42</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ChuyenMucDaoTao/CapNhat.cshtml">
-      <publishTime>05/19/2019 11:21:44</publishTime>
+      <publishTime>07/01/2019 19:46:45</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ChuyenMucDaoTao/Index.cshtml">
-      <publishTime>05/19/2019 11:20:51</publishTime>
+      <publishTime>06/25/2019 20:27:40</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ChuyenMucDaoTao/ThemMoi.cshtml">
-      <publishTime>05/19/2019 11:22:18</publishTime>
+      <publishTime>07/01/2019 19:46:50</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ChuyenMucTinTuc/CapNhat.cshtml">
-      <publishTime>05/19/2019 09:22:59</publishTime>
+      <publishTime>07/01/2019 19:46:39</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ChuyenMucTinTuc/Index.cshtml">
-      <publishTime>05/19/2019 09:38:59</publishTime>
+      <publishTime>06/25/2019 20:24:55</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ChuyenMucTinTuc/ThemMoi.cshtml">
-      <publishTime>05/19/2019 09:22:26</publishTime>
+      <publishTime>07/01/2019 19:46:33</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DanhMuc/CapNhat.cshtml">
       <publishTime>05/19/2019 15:23:27</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DanhMuc/Index.cshtml">
-      <publishTime>05/19/2019 15:21:15</publishTime>
+      <publishTime>06/25/2019 20:27:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DanhMuc/ThemMoi.cshtml">
       <publishTime>05/19/2019 15:23:08</publishTime>
@@ -262,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/19/2019 17:25:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DaoTao/Index.cshtml">
-      <publishTime>05/19/2019 17:23:53</publishTime>
+      <publishTime>06/25/2019 20:29:45</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DaoTao/ThemMoi.cshtml">
       <publishTime>05/19/2019 17:25:33</publishTime>
@@ -270,8 +270,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/Default/Index.cshtml">
       <publishTime>05/19/2019 23:22:21</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/DonViPhongKhoa/CapNhat.cshtml">
+      <publishTime>06/04/2019 20:13:48</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/DonViPhongKhoa/Index.cshtml">
-      <publishTime>05/19/2019 10:49:56</publishTime>
+      <publishTime>06/25/2019 20:28:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DonViPhongKhoa/ThemMoiDonVi.cshtml">
       <publishTime>05/19/2019 10:49:39</publishTime>
@@ -280,7 +283,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/30/2019 20:58:48</publishTime>
     </File>
     <File Include="Areas/Admin/Views/LichCongTac/Index.cshtml">
-      <publishTime>05/19/2019 11:12:01</publishTime>
+      <publishTime>06/25/2019 20:29:39</publishTime>
     </File>
     <File Include="Areas/Admin/Views/LichCongTac/ThemMoi.cshtml">
       <publishTime>05/30/2019 20:58:56</publishTime>
@@ -288,8 +291,32 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/LienHe/Index.cshtml">
       <publishTime>05/19/2019 11:58:05</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/Media/Category.cshtml">
+      <publishTime>06/12/2019 20:54:35</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Media/Detail.cshtml">
+      <publishTime>06/12/2019 21:11:11</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Media/DetailCategory.cshtml">
+      <publishTime>07/01/2019 19:51:32</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Media/Index.cshtml">
+      <publishTime>06/20/2019 19:37:46</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/Shared/_LayoutAdmin.cshtml">
-      <publishTime>05/19/2019 23:23:21</publishTime>
+      <publishTime>06/12/2019 21:05:43</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TaiLieu/Category.cshtml">
+      <publishTime>06/03/2019 21:53:05</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TaiLieu/Detail.cshtml">
+      <publishTime>06/12/2019 20:53:55</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TaiLieu/DetailCategory.cshtml">
+      <publishTime>07/01/2019 19:47:10</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/TaiLieu/Index.cshtml">
+      <publishTime>06/12/2019 21:01:15</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ThanhVien/ChangePass.cshtml">
       <publishTime>05/19/2019 11:49:52</publishTime>
@@ -298,13 +325,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/19/2019 11:50:46</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ThanhVien/ThemMoi.cshtml">
-      <publishTime>05/19/2019 11:48:44</publishTime>
+      <publishTime>06/27/2019 14:10:02</publishTime>
     </File>
     <File Include="Areas/Admin/Views/TinTuc/Detail.cshtml">
-      <publishTime>05/19/2019 22:30:58</publishTime>
+      <publishTime>06/03/2019 20:20:15</publishTime>
     </File>
     <File Include="Areas/Admin/Views/TinTuc/Index.cshtml">
-      <publishTime>05/19/2019 17:17:03</publishTime>
+      <publishTime>06/25/2019 20:29:29</publishTime>
     </File>
     <File Include="Areas/Admin/Views/web.config">
       <publishTime>05/17/2019 21:55:47</publishTime>
@@ -316,10 +343,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>06/01/2019 21:22:48</publishTime>
+      <publishTime>07/01/2019 20:14:21</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>06/01/2019 21:22:48</publishTime>
+      <publishTime>07/01/2019 20:14:21</publishTime>
     </File>
     <File Include="bin/Autofac.dll">
       <publishTime>03/21/2019 17:17:50</publishTime>
@@ -391,19 +418,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2012 13:00:52</publishTime>
     </File>
     <File Include="bin/ProjectNews.dll">
-      <publishTime>06/01/2019 21:22:42</publishTime>
+      <publishTime>07/01/2019 20:07:44</publishTime>
     </File>
     <File Include="bin/ProjectNews.pdb">
-      <publishTime>06/01/2019 21:22:42</publishTime>
+      <publishTime>07/01/2019 20:07:44</publishTime>
     </File>
     <File Include="bin/ServiceNews.dll">
-      <publishTime>06/01/2019 20:39:50</publishTime>
+      <publishTime>07/01/2019 20:07:44</publishTime>
     </File>
     <File Include="bin/ServiceNews.dll.config">
       <publishTime>05/14/2019 21:56:50</publishTime>
     </File>
     <File Include="bin/ServiceNews.pdb">
-      <publishTime>06/01/2019 20:39:50</publishTime>
+      <publishTime>07/01/2019 20:07:44</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
       <publishTime>07/19/2017 10:01:30</publishTime>
@@ -2239,13 +2266,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/19/2019 22:41:20</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>06/01/2019 21:21:20</publishTime>
+      <publishTime>06/26/2019 19:56:14</publishTime>
     </File>
     <File Include="Content/StyleSheetAdmin.css">
       <publishTime>05/19/2019 08:53:02</publishTime>
     </File>
     <File Include="Content/StyleSheetLogin.css">
       <publishTime>05/19/2019 23:30:45</publishTime>
+    </File>
+    <File Include="Content/StyleSheetMobile.css">
+      <publishTime>06/12/2019 21:50:47</publishTime>
     </File>
     <File Include="Content/tether/tether-theme-arrows-dark.css">
       <publishTime>05/17/2019 21:50:11</publishTime>
@@ -2440,7 +2470,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/12/2019 17:14:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>06/01/2019 21:22:45</publishTime>
+      <publishTime>07/01/2019 20:14:19</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>05/12/2019 17:14:23</publishTime>
@@ -3715,7 +3745,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/30/2019 20:52:08</publishTime>
     </File>
     <File Include="Scripts/JavaScriptAdmin.js">
-      <publishTime>05/19/2019 23:29:07</publishTime>
+      <publishTime>07/01/2019 19:58:17</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.js">
       <publishTime>05/17/2019 21:34:16</publishTime>
@@ -3798,14 +3828,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
       <publishTime>05/12/2019 17:14:29</publishTime>
     </File>
+    <File Include="Views/Home/childenLichCongTac.cshtml">
+      <publishTime>06/03/2019 21:14:15</publishTime>
+    </File>
+    <File Include="Views/Home/childrenLichCongTac.cshtml">
+      <publishTime>06/04/2019 19:19:13</publishTime>
+    </File>
     <File Include="Views/Home/Detail.cshtml">
       <publishTime>05/19/2019 17:46:54</publishTime>
     </File>
     <File Include="Views/Home/Display.cshtml">
-      <publishTime>06/01/2019 19:49:46</publishTime>
+      <publishTime>07/01/2019 19:37:38</publishTime>
     </File>
     <File Include="Views/Home/getAbout.cshtml">
       <publishTime>05/19/2019 23:05:49</publishTime>
+    </File>
+    <File Include="Views/Home/getBanDo.cshtml">
+      <publishTime>06/03/2019 20:16:48</publishTime>
     </File>
     <File Include="Views/Home/getBannerMain.cshtml">
       <publishTime>05/19/2019 17:55:32</publishTime>
@@ -3820,58 +3859,79 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/19/2019 21:31:22</publishTime>
     </File>
     <File Include="Views/Home/getBoxMedia.cshtml">
-      <publishTime>05/19/2019 22:10:23</publishTime>
+      <publishTime>06/20/2019 19:37:46</publishTime>
     </File>
     <File Include="Views/Home/getBoxPhongSuAnh.cshtml">
-      <publishTime>05/19/2019 22:07:56</publishTime>
+      <publishTime>07/01/2019 20:12:01</publishTime>
     </File>
     <File Include="Views/Home/getBoxSachVaHocLieu.cshtml">
-      <publishTime>05/19/2019 22:02:40</publishTime>
+      <publishTime>06/13/2019 22:54:35</publishTime>
     </File>
     <File Include="Views/Home/getBoxTinTucChung.cshtml">
-      <publishTime>05/30/2019 20:42:50</publishTime>
+      <publishTime>06/13/2019 22:52:09</publishTime>
     </File>
     <File Include="Views/Home/getBoxTinTucNganh.cshtml">
-      <publishTime>05/30/2019 20:43:14</publishTime>
+      <publishTime>06/13/2019 22:53:35</publishTime>
     </File>
     <File Include="Views/Home/getBreadcrumb.cshtml">
       <publishTime>05/19/2019 21:19:24</publishTime>
     </File>
     <File Include="Views/Home/getChildDisplay.cshtml">
-      <publishTime>06/01/2019 20:01:15</publishTime>
+      <publishTime>06/26/2019 20:16:23</publishTime>
     </File>
     <File Include="Views/Home/getDanhMucPhai.cshtml">
-      <publishTime>05/20/2019 00:09:04</publishTime>
+      <publishTime>06/26/2019 19:57:32</publishTime>
     </File>
     <File Include="Views/Home/getFooterInfo.cshtml">
       <publishTime>05/19/2019 22:14:50</publishTime>
     </File>
     <File Include="Views/Home/getMenuMain.cshtml">
-      <publishTime>05/19/2019 23:38:12</publishTime>
+      <publishTime>06/25/2019 20:00:05</publishTime>
     </File>
     <File Include="Views/Home/getMenuTop.cshtml">
       <publishTime>06/01/2019 20:33:38</publishTime>
     </File>
     <File Include="Views/Home/getSearch.cshtml">
-      <publishTime>05/20/2019 00:27:48</publishTime>
+      <publishTime>06/26/2019 20:08:28</publishTime>
     </File>
     <File Include="Views/Home/getSliderMain.cshtml">
-      <publishTime>05/19/2019 21:20:06</publishTime>
+      <publishTime>07/01/2019 20:12:11</publishTime>
+    </File>
+    <File Include="Views/Home/getSubContentByLink.cshtml">
+      <publishTime>06/25/2019 20:00:05</publishTime>
     </File>
     <File Include="Views/Home/getSubMenu.cshtml">
       <publishTime>05/19/2019 15:53:29</publishTime>
     </File>
     <File Include="Views/Home/getThongBao.cshtml">
-      <publishTime>05/19/2019 22:45:06</publishTime>
+      <publishTime>06/13/2019 22:42:46</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/19/2019 22:42:17</publishTime>
+      <publishTime>06/13/2019 22:56:36</publishTime>
+    </File>
+    <File Include="Views/Home/LichCongTac.cshtml">
+      <publishTime>06/13/2019 23:30:25</publishTime>
+    </File>
+    <File Include="Views/Home/LichCongTacChilden.cshtml">
+      <publishTime>06/03/2019 21:18:09</publishTime>
+    </File>
+    <File Include="Views/Home/LichCongTacChildren.cshtml">
+      <publishTime>06/04/2019 19:19:13</publishTime>
+    </File>
+    <File Include="Views/Home/LichCongTacChildren2.cshtml">
+      <publishTime>06/13/2019 23:28:53</publishTime>
     </File>
     <File Include="Views/Home/LienHe.cshtml">
       <publishTime>06/01/2019 21:20:47</publishTime>
     </File>
     <File Include="Views/Home/Search.cshtml">
-      <publishTime>05/20/2019 00:29:31</publishTime>
+      <publishTime>06/26/2019 20:14:12</publishTime>
+    </File>
+    <File Include="Views/Home/ThongBao.cshtml">
+      <publishTime>06/03/2019 20:35:19</publishTime>
+    </File>
+    <File Include="Views/Home/ViewVanBan.cshtml">
+      <publishTime>06/04/2019 20:09:01</publishTime>
     </File>
     <File Include="Views/Home/_HitCounter.cshtml">
       <publishTime>05/19/2019 22:55:40</publishTime>
@@ -3901,7 +3961,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/12/2019 17:14:29</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/01/2019 20:35:04</publishTime>
+      <publishTime>06/13/2019 23:33:24</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>05/12/2019 17:14:29</publishTime>
@@ -3913,7 +3973,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/12/2019 17:14:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/20/2019 00:13:39</publishTime>
+      <publishTime>06/20/2019 19:55:58</publishTime>
     </File>
   </ItemGroup>
 </Project>

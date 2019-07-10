@@ -64,11 +64,11 @@
                                 <thead>
                                     <tr>
                                         <th width="50">STT</th>
-                                        <th width="350">Tiêu đề</th>
-                                        <th width="150">Link</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Chuyên mục</th>
-                                        <th width="120">Thao tác</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Link</th>
+                                        <th width="50">Ngày tạo</th>
+                                        <th width="150">Chuyên mục</th>
+                                        <th width="185">Thao tác</th>
                                     </tr>
                                 </thead>
                                 @if (Model != null && Model.Count() > 0)
@@ -76,17 +76,33 @@
                                     foreach (var item in Model)
                                     {
                                         count++;
-                                <tr>
-                                    <td class="text-center">@count</td>
-                                    <td>@item.contentName</td>
-                                    <td>@item.contentAlias</td>
-                                    <td>@item.contentCreateTime</td>
-                                    <td>@Html.Action("getNameById", new { Id = item.contentParentId })</td>
-                                    <td>
-                                        <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "TinTuc", new { Id = item.contentId })"><i class="fa fa-pencil"></i></a>
-                                        <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId')"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <td class="text-center">@count</td>
+                                            <td>@item.contentName</td>
+                                            <td>@item.contentAlias</td>
+                                            <td>@item.contentCreateTime</td>
+                                            <td>@Html.Action("getNameById", new { Id = item.contentParentId })</td>
+                                            <td>
+                                                @if (!item.isApproval)
+                                                {
+                                                    <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "TinTuc", new { Id = item.contentId })"><i class="fa fa-pencil"></i></a>
+                                                    <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId','TinTuc')"><i class="fa fa-trash"></i></button>
+                                                    if (User.Identity.Name == "admin@gmail.com" || User.Identity.Name == "quantri@gmail.com")
+                                                    {
+                                                        <button type="button" class="btn btn-success btn-flat" title="Duyệt" onclick="Approval('@item.contentId','TinTuc')"><i class="fa fa-check"></i></button>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (User.Identity.Name == "admin@gmail.com" || User.Identity.Name == "quantri@gmail.com")
+                                                    {
+                                                        <button type="button" class="btn btn-info btn-flat" title="Hủy duyệt" onclick="UnApproval('@item.contentId','TinTuc')"><i class="fa fa-exclamation-triangle"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId','TinTuc')"><i class="fa fa-trash"></i></button>
+                                                    }
+                                                }
+                                                <a title="Xem nhanh" class="btn btn-primary btn-flat" href="/@item.contentAlias" target="_blank"><i class="fa fa-eye"></i></a>
+                                            </td>
+                                        </tr>
                                     }
                                 }
                             </table>

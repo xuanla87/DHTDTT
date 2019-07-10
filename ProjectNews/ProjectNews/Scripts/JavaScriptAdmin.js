@@ -1,6 +1,6 @@
 ﻿$('.number').keypress(function (event) {
     var keycode = event.which;
-    if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
+    if (!(event.shiftKey === false && (keycode === 46 || keycode === 8 || keycode === 37 || keycode === 39 || (keycode >= 48 && keycode <= 57)))) {
         event.preventDefault();
     }
 });
@@ -106,6 +106,45 @@ function trash(x, y) {
         }
     }
 }
+function Approval(x, y) {
+    var check = confirm('Bạn có chắn chắn muốn duyệt không?');
+    if (check) {
+        if (x > 0) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/TinTuc/Approval",
+                data: { id: x },
+                datatype: "json",
+                success: function (data) {
+                    window.location.href = "/Admin/" + y;
+                }
+            });
+        }
+        else {
+            alert("Lỗi không thể xóa!");
+        }
+    }
+}
+function UnApproval(x, y) {
+    var check = confirm('Bạn có chắn chắn muốn hủy duyệt không?');
+    if (check) {
+        if (x > 0) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/TinTuc/UnApproval",
+                data: { id: x },
+                datatype: "json",
+                success: function (data) {
+                    window.location.href = "/Admin/" + y;
+                }
+            });
+        }
+        else {
+            alert("Lỗi không thể xóa!");
+        }
+    }
+}
+
 function setLanguage(x) {
     $.ajax({
         type: "GET",
@@ -225,7 +264,7 @@ function UnApprovalDetail(x) {
 function logout() {
     $.ajax({
         type: "GET",
-        url: "Account/LogOff",
+        url: "/Account/LogOff",
         datatype: "json",
         success: function (data) {
             window.location.reload(true);

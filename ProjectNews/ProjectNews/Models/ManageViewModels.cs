@@ -85,4 +85,11 @@ namespace ProjectNews.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
+    public class RoleModel
+    {
+        public string RoleId;
+        [Required]
+        public string RoleName;
+    }
 }

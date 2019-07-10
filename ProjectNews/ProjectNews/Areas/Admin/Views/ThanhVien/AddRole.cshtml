@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Thêm quyền";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model ProjectNews.Models.RoleModel
+<section class="content-header">
+    <h1 class="title text-uppercase text-bold">@ViewBag.Title</h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li><a href="/Admin/ThanhVien">Quản lý thành viên</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm())
+                {
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(x => x.RoleId)
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @Html.Label("Tên quyền", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.RoleName, new { @class = "form-control", @placeholder = "Nhập tên quyền.." })
+                                    @Html.ValidationMessageFor(x => x.RoleName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -76,6 +76,11 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
+                                    <div class="form-group">
+                                        @Html.Label("Sắp xếp", new { @class = "control-lable" })
+                                        @Html.TextBoxFor(x => x.Isort, new { @class = "form-control number" })
+                                        @Html.ValidationMessageFor(x => x.Isort, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                 </div>

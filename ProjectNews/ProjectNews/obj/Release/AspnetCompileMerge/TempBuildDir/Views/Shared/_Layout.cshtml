@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700&amp;subset=vietnamese" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheetMobile.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="main-bannner">
@@ -41,13 +45,14 @@
             </div>
             <div class="body">
                 <div class="row">
-                    <div class="col-lg-7">
+                    @Html.Action("getBanDo", "Home")
+                    <div class="col-lg-4 item  border-right">
                         @Html.Action("getFooterInfo", "Home")
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 item  border-right">
                         @Html.Action("getAbout", "Home")
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 item">
                         @Html.Action("_HitCounter", "Home")
                     </div>
                 </div>

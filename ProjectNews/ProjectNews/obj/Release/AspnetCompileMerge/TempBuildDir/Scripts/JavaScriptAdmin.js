@@ -93,7 +93,7 @@ function trash(x, y) {
         if (x > 0) {
             $.ajax({
                 type: "GET",
-                url: "/Admin/News/Trash",
+                url: "/Admin/TinTuc/Trash",
                 data: { id: x },
                 datatype: "json",
                 success: function (data) {

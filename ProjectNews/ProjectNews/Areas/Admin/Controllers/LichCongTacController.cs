@@ -20,7 +20,7 @@ namespace ProjectNews.Areas.Admin.Controllers
         public ActionResult Index(string _searchKey, int? _parentId, int? _pageIndex)
         {
             ContentView result;
-            result = _services.GetAll(_searchKey, null, null, _parentId, "LICHCONGTAC", 1, false, _pageIndex, 20);
+            result = _services.GetAll(_searchKey, null, null, _parentId, "LICHCONGTAC", 1, false, _pageIndex, 20, null);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;

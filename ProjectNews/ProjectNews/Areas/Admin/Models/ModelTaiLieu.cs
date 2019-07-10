@@ -8,7 +8,7 @@ namespace ProjectNews.Areas.Admin.Models
 {
     public class ModelTaiLieu
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required(ErrorMessage = "Nhập tiêu đề!")]
         public string Name { get; set; }
         public string Alias { get; set; }
@@ -17,7 +17,7 @@ namespace ProjectNews.Areas.Admin.Models
         public string BodyContent { get; set; }
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         public string ParentName { get; set; }
         public string MetaTitle { get; set; }
         public string MetaKeywords { get; set; }

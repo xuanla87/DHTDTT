@@ -29,6 +29,7 @@ namespace ProjectNews.Areas.Admin.Models
         public int isSort { get; set; }
         public bool isTrash { get; set; }
         public bool isNew { get; set; }
+        public bool isApproval { get; set; }
         public string authorize { get; set; }
     }
 }

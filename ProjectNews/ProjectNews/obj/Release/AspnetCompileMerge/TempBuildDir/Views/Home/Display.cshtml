@@ -10,11 +10,24 @@
             <div class="breadcrumb">
                 @Html.Action("getBreadcrumb", "Home", new { pageUrl = Model.contentAlias })
             </div>
-            @if (Model.contentKey.StartsWith("CHUYENMUC"))
+            @if (Model.contentKey.StartsWith("CHUYENMUCTINTUC"))
             {
                 <div class="page-content">
                     @Html.Action("getChildDisplay", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
                     @Html.Raw(Model.contentBody)
+                </div>
+            }
+            else if (Model.contentKey.StartsWith("DONVIPHONGKHOA"))
+            {
+                <div class="page-content">
+                    @Html.Action("childrenLichCongTac", "Home", new { Id = Model.contentId })
+                    @Html.Action("LichCongTacChildren", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+                </div>
+            }
+            else if (Model.contentKey.StartsWith("CHUYENMUCTAILIEU"))
+            {
+                <div class="page-content">
+                    @Html.Action("ViewVanBan", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
                 </div>
             }
             else

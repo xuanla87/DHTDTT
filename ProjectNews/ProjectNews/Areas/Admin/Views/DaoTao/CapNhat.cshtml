@@ -113,14 +113,7 @@
 @section scriptAs {
     <script>
         $(function () {
-            CKEDITOR.replace('contentBody', {
-                toolbar: [
-                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                    ['Bold', 'Italic', 'Underline'],
-                    ['Image', 'Youtube', 'Link', 'Unlink'], ['Styles', 'Format', 'Font', 'FontSize'], ['TextColor', 'BGColor'], ['Maximize', 'Source']
-                ]
-
-            });
+           CKEDITOR.replace('contentBody');
             CKEDITOR.replace('contentDescription', {
                 toolbar: [
                     ['Bold', 'Italic', 'Underline'],

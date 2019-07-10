@@ -4,6 +4,7 @@
 @model IEnumerable<ServiceNews.Models.Content>
 @if (Model != null && Model.Count() > 0)
 {
+    <h2><a href="@ViewBag.Url">Phóng sự ảnh</a></h2>
     <div class="box-body">
         <div id="slider-phong-su-anh" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -16,6 +17,11 @@
                             <a href="@item.contentAlias" title="@item.contentName">
                                 <img src="@item.contentThumbnail" alt="@item.contentName">
                             </a>
+                            <div class="caption">
+                                <a href="@item.contentAlias">
+                                    @Html.Raw(item.contentDescription)
+                                </a>
+                            </div>
                         </div>
                     }
                     else
@@ -24,9 +30,22 @@
                             <a href="@item.contentAlias" title="@item.contentName">
                                 <img src="@item.contentThumbnail" alt="@item.contentName">
                             </a>
+                            <div class="caption">
+                                <a href="@item.contentAlias">
+                                    @Html.Raw(item.contentDescription)
+                                </a>
+                            </div>
                         </div>
                     }
                 }
+                <a class="left carousel-control" href="#slider-phong-su-anh" data-slide="prev">
+                    <span class="fa fa-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#slider-phong-su-anh" data-slide="next">
+                    <span class="fa fa-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
     </div>

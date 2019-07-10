@@ -13,15 +13,24 @@ namespace ProjectNews.Areas.Admin.Controllers
     public class TinTucController : Controller
     {
         private IContentServices _services;
-        public TinTucController(IContentServices services)
+        private IRoleFunctionServices _Roleservices;
+        private RoleFunction _RoleCurent = null;
+        public TinTucController(IContentServices services, IRoleFunctionServices Roleservices)
         {
             _services = services;
+            _Roleservices = Roleservices;
+
         }
         public ActionResult Index(string _searchKey, int? _parentId, DateTime? _fromDate, DateTime? _toDate, int? _pageIndex)
         {
             ContentView result;
             int _languageId = 1;
-            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "TINTUC", _languageId, false, _pageIndex, 20);
+            string _userName = null;
+            if (User.Identity.Name == "admin@gmail.com" || User.Identity.Name == "quantri@gmail.com")
+                _userName = null;
+            else
+                _userName = User.Identity.Name;
+            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "TINTUC", _languageId, false, _pageIndex, 20, _userName);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;
@@ -41,7 +50,9 @@ namespace ProjectNews.Areas.Admin.Controllers
                     contentDescription = x.contentDescription,
                     contentKey = x.contentKey,
                     contentName = x.contentName,
-                    contentParentId = x.contentParentId
+                    contentParentId = x.contentParentId,
+                    contentCreateTime = x.contentCreateTime.ToString("dd/MM/yyyy"),
+                    isApproval = (x.isApproval ?? false)
                 });
                 return View(model);
             }
@@ -120,6 +131,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     model.contentName = entity.contentName;
                     model.contentUpdateUser = User.Identity.Name;
                     model.isNew = entity.isNew;
+                    model.isApproval = checkAdmin();
                     _services.Update(model);
                     _services.Save();
                 }
@@ -191,6 +203,76 @@ namespace ProjectNews.Areas.Admin.Controllers
             else
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult Approval(int Id)
+        {
+            if (Id > 0)
+            {
+                _services.Approval(Id);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult UnApproval(int Id)
+        {
+            if (Id > 0)
+            {
+                _services.UnApproval(Id);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public bool checkEdit()
+        {
+            _RoleCurent = _Roleservices.GetByUserNameCode(User.Identity.Name, "TINTUC");
+            if (_RoleCurent != null && _RoleCurent.ActionEdit)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool checkDelete()
+        {
+            _RoleCurent = _Roleservices.GetByUserNameCode(User.Identity.Name, "TINTUC");
+            if (_RoleCurent != null && _RoleCurent.ActionDelete)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool checkAdd()
+        {
+            _RoleCurent = _Roleservices.GetByUserNameCode(User.Identity.Name, "TINTUC");
+            if (_RoleCurent != null && _RoleCurent.ActionAdd)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool checkAdmin()
+        {
+            _RoleCurent = _Roleservices.GetByUserNameCode(User.Identity.Name, "TINTUC");
+            if (_RoleCurent != null && _RoleCurent.ActionAdmin)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
