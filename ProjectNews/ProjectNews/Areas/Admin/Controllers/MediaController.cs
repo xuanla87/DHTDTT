@@ -44,6 +44,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     Name = x.contentName,
                     Note = x.contentDescription,
                     ParentId = (int)x.contentParentId,
+                    isApproval = (x.isApproval ?? false),
                     CreateTime = x.contentUpdateTime.ToString("dd/MM/yyyy")
                 });
                 return View(model);

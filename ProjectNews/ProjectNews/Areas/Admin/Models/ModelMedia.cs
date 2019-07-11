@@ -24,5 +24,6 @@ namespace ProjectNews.Areas.Admin.Models
         public string CreateTime { get; set; }
         public int Sort { get; set; }
         public string TacGia { get; set; }
+        public bool isApproval { get; set; }
     }
 }

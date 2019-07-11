@@ -83,8 +83,24 @@
                                     <td>@item.contentCreateTime</td>
                                     <td>@Html.Action("getNameById", new { Id = item.contentParentId })</td>
                                     <td>
-                                        <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("CapNhat", "DaoTao", new { Id = item.contentId })"><i class="fa fa-pencil"></i></a>
-                                        <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId')"><i class="fa fa-trash"></i></button>
+                                        @if (!item.isApproval)
+                                        {
+                                            <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("CapNhat", "DaoTao", new { Id = item.contentId })"><i class="fa fa-pencil"></i></a>
+                                            <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId')"><i class="fa fa-trash"></i></button>
+                                            if (User.IsInRole("Admin"))
+                                            {
+                                                <button type="button" class="btn btn-success btn-flat" title="Duyệt" onclick="Approval('@item.contentId','DaoTao')"><i class="fa fa-check"></i></button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (User.IsInRole("Admin"))
+                                            {
+                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("CapNhat", "DaoTao", new { Id = item.contentId })"><i class="fa fa-pencil"></i></a>
+                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId')"><i class="fa fa-trash"></i></button>
+                                            }
+                                        }
+                                        <a title="Xem nhanh" class="btn btn-primary btn-flat" href="/@item.contentAlias" target="_blank"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                                     }
