@@ -30,7 +30,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _userName = null;
             else
                 _userName = User.Identity.Name;
-            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "TINTUC", _languageId, false, _pageIndex, 20, _userName);
+            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "TINTUC", _languageId, false, _pageIndex, 20, _userName, null);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;

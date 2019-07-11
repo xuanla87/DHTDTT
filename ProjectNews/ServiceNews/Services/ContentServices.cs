@@ -24,7 +24,7 @@
 
         Content UnApproval(int _id);
 
-        ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize, string _userName);
+        ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize, string _userName, bool? _isApproval);
         ContentView GetAllAdmin(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
         IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
@@ -71,7 +71,7 @@
         {
             return _Repository.Delete((int)_id);
         }
-        public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize, string _userName)
+        public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize, string _userName, bool? _isApproval)
         {
             var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value);
             if (!string.IsNullOrEmpty(_userName))
@@ -101,6 +101,10 @@
             if (_toDate.HasValue)
             {
                 enContent = enContent.Where(x => x.contentUpdateTime.Date <= _toDate.Value.Date);
+            }
+            if (_isApproval.HasValue)
+            {
+                enContent = enContent.Where(x => x.isApproval == _isApproval);
             }
             enContent = enContent.OrderBy(x => x.contentCreateTime);
             int totalRecord = enContent.Count();
@@ -158,7 +162,7 @@
 
         public ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isNew, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey);
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey && x.isApproval == true);
 
             if (!string.IsNullOrEmpty(_keyWords))
             {
@@ -242,7 +246,7 @@
             Save();
             return enContent;
         }
-        
+
         public Content UnTrash(int _id)
         {
             var enContent = _Repository.GetSingleById((int)_id);

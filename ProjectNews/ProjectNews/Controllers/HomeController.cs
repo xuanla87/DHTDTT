@@ -68,7 +68,7 @@ namespace ProjectNews.Controllers
             var entity = _services.GetByAlias(_link);
             if (entity != null)
             {
-                var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null, null);
+                var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null, null, null);
                 var List = model.ViewContents.OrderBy(x => x.isSort);
                 return PartialView(List);
             }
@@ -127,7 +127,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxSlider"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null, null);
             return PartialView(eSlider.ViewContents);
         }
 
@@ -135,7 +135,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxBanner"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null, null);
             return PartialView(eSlider.ViewContents.OrderBy(x => x.isSort));
         }
 
@@ -143,7 +143,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxLienKet"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null, null);
             return PartialView(eSlider.ViewContents.OrderBy(x => x.isSort));
         }
 
@@ -151,7 +151,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxBannerRight"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "BANNER", 1, false, null, null, null, null);
             return PartialView(eSlider.ViewContents.OrderBy(x => x.isSort));
         }
 
@@ -159,7 +159,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxTinTucChung"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null, true);
             var entity = _services.GetById(Id);
             ViewBag.Readmore = "<a href=\"" + entity.contentAlias + "\">>>>>Xem thêm</a>";
             ViewBag.Url = entity.contentAlias;
@@ -170,7 +170,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxTinTucNganh"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null, true);
             var entity = _services.GetById(Id);
             ViewBag.Readmore = "<a href=\"" + entity.contentAlias + "\">>>>>Xem thêm</a>";
             ViewBag.Url = entity.contentAlias;
@@ -181,7 +181,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxSachVaHocLieu"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null, true);
             var entity = _services.GetById(Id);
             ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(1));
@@ -191,7 +191,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxPhongSuAnh"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null, true);
             var entity = _services.GetById(Id);
             ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime));
@@ -201,7 +201,7 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxMedia"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "MEDIA", 1, false, null, null, null);
+            var eSlider = _services.GetAll(null, null, null, Id, "MEDIA", 1, false, null, null, null, true);
             var entity = _services.GetById(Id);
             ViewBag.Url = entity.contentAlias;
             return PartialView(eSlider.ViewContents.OrderBy(x => x.isSort));
@@ -269,7 +269,7 @@ namespace ProjectNews.Controllers
             {
                 int _totalRecord = 0;
                 _pageIndex = _pageIndex ?? 1;
-                var entity = _services.GetAll(searchKey, null, null, null, "TINTUC", 1, false, _pageIndex, 10, null);
+                var entity = _services.GetAll(searchKey, null, null, null, "TINTUC", 1, false, _pageIndex, 10, null, true);
                 _totalRecord = entity.TotalRecord;
                 ViewBag.TotalRecord = _totalRecord.ToString();
                 ViewBag.TotalPage = entity.Total;
@@ -284,7 +284,7 @@ namespace ProjectNews.Controllers
         {
             int _totalRecord = 0;
             _pageIndex = _pageIndex ?? 1;
-            var entity = _services.GetAll(null, null, null, Id, null, 1, false, _pageIndex, 10, null);
+            var entity = _services.GetAll(null, null, null, Id, null, 1, false, _pageIndex, 10, null, true);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;
@@ -364,20 +364,20 @@ namespace ProjectNews.Controllers
 
         public ActionResult LichCongTac()
         {
-            var entity = _services.GetAll(null, null, null, null, "DONVIPHONGKHOA", 1, false, null, null, null);
+            var entity = _services.GetAll(null, null, null, null, "DONVIPHONGKHOA", 1, false, null, null, null, true);
             return View(entity.ViewContents.Where(x => x.contentParentId == null).OrderByDescending(x => x.contentCreateTime));
         }
 
         public ActionResult childrenLichCongTac(int Id)
         {
-            var entity = _services.GetAll(null, null, null, Id, "DONVIPHONGKHOA", 1, false, null, null, null);
+            var entity = _services.GetAll(null, null, null, Id, "DONVIPHONGKHOA", 1, false, null, null, null, true);
             return PartialView(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
         }
 
         public ActionResult LichCongTacChildren(int Id, string _url, int? _pageIndex)
         {
             int _totalRecord = 0;
-            var entity = _services.GetAll(null, null, null, Id, "LICHCONGTAC", 1, false, _pageIndex, 10, null);
+            var entity = _services.GetAll(null, null, null, Id, "LICHCONGTAC", 1, false, _pageIndex, 10, null, true);
             _pageIndex = _pageIndex ?? 1;
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
@@ -390,7 +390,7 @@ namespace ProjectNews.Controllers
         public ActionResult LichCongTacChildren2(int Id)
         {
             int _totalRecord = 0;
-            var entity = _services.GetAll(null, null, null, Id, "LICHCONGTAC", 1, false, 1, 5, null);
+            var entity = _services.GetAll(null, null, null, Id, "LICHCONGTAC", 1, false, 1, 5, null, true);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;
@@ -401,13 +401,13 @@ namespace ProjectNews.Controllers
         {
             int _totalRecord = 0;
             _pageIndex = _pageIndex ?? 1;
-            var entity = _services.GetAll(null, null, null, Id, "DOCUMENT", 1, false, _pageIndex, 10, null);
+            var entity = _services.GetAll(null, null, null, Id, "DOCUMENT", 1, false, _pageIndex, 10, null, true);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;
             ViewBag.PageIndex = _pageIndex ?? 1;
             ViewBag.CurentUrl = _url;
-            var entitys = _services.GetAll(null, null, null, Id, "CHUYENMUCTINTUC", 1, false, null, null, null);
+            var entitys = _services.GetAll(null, null, null, Id, "CHUYENMUCTINTUC", 1, false, null, null, null, null);
             ViewBag.ListItem = entitys.ViewContents.OrderBy(x => x.isSort).ToList();
             return PartialView(entity.ViewContents);
         }

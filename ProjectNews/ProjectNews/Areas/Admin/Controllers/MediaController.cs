@@ -20,7 +20,7 @@ namespace ProjectNews.Areas.Admin.Controllers
         public ActionResult Index(string _searchKey, int? _parentId, DateTime? _fromDate, DateTime? _toDate, int? _pageIndex)
         {
             ContentView result;
-            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "MEDIA", 1, false, _pageIndex, 20, null);
+            result = _services.GetAll(_searchKey, _fromDate, _toDate, _parentId, "MEDIA", 1, false, _pageIndex, 20, null, null);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;
@@ -175,7 +175,7 @@ namespace ProjectNews.Areas.Admin.Controllers
         public ActionResult Category(string _searchKey, int? _parentId, int? _pageIndex)
         {
             ContentView result;
-            result = _services.GetAll(_searchKey, null, null, _parentId, "CHUYENMUCMEDIA", 1, false, _pageIndex, 20, null);
+            result = _services.GetAll(_searchKey, null, null, _parentId, "CHUYENMUCMEDIA", 1, false, _pageIndex, 20, null, null);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;
