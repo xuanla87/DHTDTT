@@ -26,7 +26,7 @@ namespace ProjectNews.Areas.Admin.Controllers
             ContentView result;
             int _languageId = 1;
             string _userName = null;
-            if (User.Identity.Name == "admin@gmail.com" || User.Identity.Name == "quantri@gmail.com")
+            if (User.IsInRole("Admin"))
                 _userName = null;
             else
                 _userName = User.Identity.Name;

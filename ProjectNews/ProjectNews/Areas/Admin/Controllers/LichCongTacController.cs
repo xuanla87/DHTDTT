@@ -19,8 +19,13 @@ namespace ProjectNews.Areas.Admin.Controllers
 
         public ActionResult Index(string _searchKey, int? _parentId, int? _pageIndex)
         {
+            string _userName = null;
+            if (User.IsInRole("Admin"))
+                _userName = null;
+            else
+                _userName = User.Identity.Name;
             ContentView result;
-            result = _services.GetAll(_searchKey, null, null, _parentId, "LICHCONGTAC", 1, false, _pageIndex, 20, null, null);
+            result = _services.GetAll(_searchKey, null, null, _parentId, "LICHCONGTAC", 1, false, _pageIndex, 20, _userName, null);
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;
@@ -74,7 +79,8 @@ namespace ProjectNews.Areas.Admin.Controllers
                     contentLanguageId = 1,
                     contentKey = "LICHCONGTAC",
                     contentCreateUser = User.Identity.Name,
-                    contentUpdateUser = User.Identity.Name
+                    contentUpdateUser = User.Identity.Name,
+                    isApproval = true
                 };
                 _services.Add(entity);
                 _services.Save();
