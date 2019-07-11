@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace ProjectNews.Areas.Admin.Controllers
 {
+    [Authorize]
     public class PhongBanController : Controller
     {
         private IRoleFunctionServices _services;

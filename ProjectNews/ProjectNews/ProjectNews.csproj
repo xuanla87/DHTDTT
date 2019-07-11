@@ -1420,6 +1420,7 @@
     <Content Include="Areas\Admin\Views\ThanhVien\AddRole.cshtml" />
     <Content Include="Areas\Admin\Views\PhongBan\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\PhongBan\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThanhVien\AddBoMon.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="Scripts\ckeditor\samples\toolbarconfigurator\font\config.json" />

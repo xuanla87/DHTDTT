@@ -9,6 +9,7 @@ using ServiceNews.Services;
 
 namespace ProjectNews.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ChuyenMucDaoTaoController : Controller
     {
         private IContentServices _services;
