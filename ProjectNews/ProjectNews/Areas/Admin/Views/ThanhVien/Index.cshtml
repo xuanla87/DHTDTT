@@ -25,8 +25,9 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th width="350">Tài khoản</th>
-                                        <th width="350">Họ tên</th>
+                                        <th width="150">Tài khoản</th>
+                                        <th width="150">Họ tên</th>
+                                        <th width="100">Bộ môn</th>
                                         <th width="120">Thao tác</th>
                                     </tr>
                                 </thead>
@@ -37,9 +38,10 @@
                                         <tr>
                                             <td>@item.UserName</td>
                                             <td>@item.FullName</td>
+                                            <td>@Html.Action("getRoleByUserId", new { Id = item.Id })</td>
                                             <td>
                                                 <a title="Cập nhật mật khẩu" class="btn btn-primary btn-flat" href="@Url.Action("ChangePass", "ThanhVien", new { Id = item.Id })"><i class="fa fa-key"></i> Đổi mật khẩu</a>
-                                                <a title="Phân quyền" class="btn btn-primary btn-flat" href="@Url.Action("Role", "ThanhVien", new { Id = item.Id })"><i class="fa fa-cube"></i> Phân quyền</a>
+                                                <a title="Phân bộ môn" class="btn btn-primary btn-flat" href="@Url.Action("AddBoMon", "ThanhVien", new { Id = item.Id })"><i class="fa fa-cube"></i> Phân bộ môn</a>
                                             </td>
                                         </tr>
                                     }

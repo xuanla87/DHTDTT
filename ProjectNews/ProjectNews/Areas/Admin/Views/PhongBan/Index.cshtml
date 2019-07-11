@@ -34,7 +34,9 @@
                                 {
                                     <tr>
                                         <td>@item.Name</td>
-                                        <td></td>
+                                        <td>
+                                            <a title="Phân quyền bộ môn" class="btn btn-primary btn-flat" href="@Url.Action("Role", "ThanhVien", new { Id = item.Id })"><i class="fa fa-cube"></i> Phân quyền bộ môn</a>
+                                        </td>
                                     </tr>
                                 }
                             }

@@ -81,7 +81,7 @@ namespace ProjectNews.Models
         public string ConfirmPassword { get; set; }
 
         public string FullName { get; set; }
-        public string[] RoleName { get; set; }
+        public string RoleName { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -111,5 +111,11 @@ namespace ProjectNews.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class RoleUserModel
+    {
+        public string UserId { get; set; }
+        public string RoleName { get; set; }
     }
 }
