@@ -1,5 +1,10 @@
 ﻿body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+p, p span, p span span, p em {
+    font-family: 'Roboto', sans-serif !important;
+    font-style: initial !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -136,7 +141,7 @@ a.title {
 
 .decs p, .decs p span, .decs p samp samp {
     text-align: justify;
-    font-size: 11px;
+    font-size: 14px !important;
     color: #404040;
     font-family: 'Roboto', sans-serif;
 }
@@ -485,7 +490,7 @@ footer {
         }
 
         .lich-cong-tac .item .title a {
-            font-size: 13px;
+            font-size: 14px !important;
             vertical-align: central;
             color: #fff;
             font-weight: 500;
@@ -535,7 +540,7 @@ footer {
             }
 
 .item .des {
-    font-size: 13px;
+    font-size: 14px !important;
 }
 
 .item .decs {
@@ -548,12 +553,21 @@ footer {
 }
 
 .media .item .des {
-    font-weight: 500;
+    font-weight: initial;
     text-align: justify;
-    font-size: 11px;
+    font-size: 14px !important;
     color: #404040;
 }
 
 .carousel-control {
     line-height: 337px;
+}
+
+.des iframe {
+    width: 100%;
+    height: auto;
+}
+
+.video-item {
+    min-height: 40px;
 }

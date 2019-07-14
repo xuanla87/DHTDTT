@@ -293,6 +293,19 @@ namespace ProjectNews.Controllers
             return PartialView(entity.ViewContents.OrderBy(x => x.isSort));
         }
 
+        public ActionResult getChildDisplayMedia(int Id, string _url, int? _pageIndex)
+        {
+            int _totalRecord = 0;
+            _pageIndex = _pageIndex ?? 1;
+            var entity = _services.GetAll(null, null, null, Id, null, 1, false, _pageIndex, 12, null, true);
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            ViewBag.CurentUrl = _url;
+            return PartialView(entity.ViewContents.OrderBy(x => x.isSort));
+        }
+
         public ActionResult getMenuTop()
         {
             return PartialView();

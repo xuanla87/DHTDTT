@@ -17,6 +17,13 @@
                     @Html.Raw(Model.contentBody)
                 </div>
             }
+            else if (Model.contentKey.StartsWith("CHUYENMUCMEDIA"))
+            {
+                <div class="page-content">
+                    @Html.Action("getChildDisplayMedia", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+                    @Html.Raw(Model.contentBody)
+                </div>
+            }
             else if (Model.contentKey.StartsWith("DONVIPHONGKHOA"))
             {
                 <div class="page-content">
