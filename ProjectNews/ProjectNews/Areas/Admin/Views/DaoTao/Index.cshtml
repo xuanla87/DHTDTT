@@ -98,6 +98,7 @@
                                             {
                                                 <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("CapNhat", "DaoTao", new { Id = item.contentId })"><i class="fa fa-pencil"></i></a>
                                                 <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId')"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-flat" title="Hủy duyệt" onclick="UnApproval('@item.contentId','DaoTao')"><i class="fa fa-exclamation-triangle"></i></button>
                                             }
                                         }
                                         <a title="Xem nhanh" class="btn btn-primary btn-flat" href="/@item.contentAlias" target="_blank"><i class="fa fa-eye"></i></a>

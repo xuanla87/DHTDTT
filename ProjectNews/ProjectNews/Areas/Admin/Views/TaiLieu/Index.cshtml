@@ -101,6 +101,7 @@
                                                     {
                                                         <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "TaiLieu", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
                                                         <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','TaiLieu')"><i class="fa fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-info btn-flat" title="Hủy duyệt" onclick="UnApproval('@item.Id','TaiLieu')"><i class="fa fa-exclamation-triangle"></i></button>
                                                     }
                                                 }
                                                 <a title="Xem nhanh" class="btn btn-primary btn-flat" href="/@item.Alias" target="_blank"><i class="fa fa-eye"></i></a>

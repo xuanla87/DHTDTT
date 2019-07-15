@@ -96,6 +96,7 @@
                                                 {
                                                     if (User.IsInRole("Admin"))
                                                     {
+                                                        <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "TinTuc", new { Id = item.contentId })"><i class="fa fa-pencil"></i></a>
                                                         <button type="button" class="btn btn-info btn-flat" title="Hủy duyệt" onclick="UnApproval('@item.contentId','TinTuc')"><i class="fa fa-exclamation-triangle"></i></button>
                                                         <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.contentId','TinTuc')"><i class="fa fa-trash"></i></button>
                                                     }
