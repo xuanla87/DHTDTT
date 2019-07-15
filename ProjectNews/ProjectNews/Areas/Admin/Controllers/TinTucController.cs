@@ -85,6 +85,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     contentParentId = model.contentParentId,
                     authorize = model.authorize,
                     isNew = model.isNew ?? false,
+                    isFeature = model.isFeature ?? false,
                     contentCreateTime = model.contentCreateTime.ToString("dd/MM/yyyy")
                 };
                 ViewBag.Title = "Cập nhật tin tức";
@@ -131,6 +132,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     model.contentName = entity.contentName;
                     model.contentUpdateUser = User.Identity.Name;
                     model.isNew = entity.isNew;
+                    model.isFeature = entity.isFeature;
                     model.isApproval = checkAdmin();
                     _services.Update(model);
                     _services.Save();
@@ -165,6 +167,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                     model.authorize = entity.authorize;
                     model.contentKey = "TINTUC";
                     model.isNew = entity.isNew;
+                    model.isFeature = entity.isFeature;
                     _services.Add(model);
                     _services.Save();
                     model.contentAlias = model.contentAlias + "-" + model.contentId;

@@ -30,10 +30,13 @@
         IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
 
         ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isNew, int? _pageIndex, int? _pageSize);
+        ContentView GetTinTucChung(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isNew, int? _pageIndex, int? _pageSize);
 
         Content GetById(int _id);
 
         Content GetByAlias(string _alias);
+
+        void UpdateView(Content model);
 
         IEnumerable<DropdownModel> Dropdownlist(int _id, int? _curentId, string _key, int _languageId);
 
@@ -106,7 +109,7 @@
             {
                 enContent = enContent.Where(x => x.isApproval == _isApproval);
             }
-            enContent = enContent.OrderBy(x => x.contentCreateTime);
+            enContent = enContent.OrderByDescending(x => x.contentCreateTime);
             int totalRecord = enContent.Count();
             if (_pageIndex != null && _pageSize != null)
             {
@@ -162,7 +165,7 @@
 
         public ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isNew, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey && x.isApproval == true);
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.isApproval == true);
 
             if (!string.IsNullOrEmpty(_keyWords))
             {
@@ -175,6 +178,49 @@
             if (_isNew.HasValue)
             {
                 enContent = enContent.Where(x => x.isNew == _isNew);
+            }
+            if (_parentId.HasValue)
+            {
+                enContent = enContent.Where(x => x.contentParentId == _parentId);
+            }
+            if (_fromDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.contentUpdateTime.Date >= _fromDate.Value.Date);
+            }
+            if (_toDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.contentUpdateTime.Date <= _toDate.Value.Date);
+            }
+            enContent = enContent.OrderByDescending(x => x.contentCreateTime);
+            int totalRecord = enContent.Count();
+            if (_pageIndex != null && _pageSize != null)
+            {
+                enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
+            }
+            var totalPage = 0;
+            if (_pageSize != null)
+            {
+                totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
+                enContent = enContent.Take(_pageSize.Value);
+            }
+            return new ContentView { ViewContents = enContent, Total = totalPage, TotalRecord = totalRecord };
+        }
+
+        public ContentView GetTinTucChung(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isFeature, int? _pageIndex, int? _pageSize)
+        {
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value  && x.isApproval == true);
+
+            if (!string.IsNullOrEmpty(_keyWords))
+            {
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || x.contentAlias.Contains(_keyWords.ToLower().Trim()));
+            }
+            if (_isTrash.HasValue)
+            {
+                enContent = enContent.Where(x => x.isTrash == _isTrash);
+            }
+            if (_isFeature.HasValue)
+            {
+                enContent = enContent.Where(x => x.isFeature == _isFeature);
             }
             if (_parentId.HasValue)
             {
@@ -260,8 +306,8 @@
         public Content Approval(int _id)
         {
             var enContent = _Repository.GetSingleById((int)_id);
-            if (enContent != null && enContent.isApproval == true)
-                enContent.isTrash = true;
+            if (enContent != null)
+                enContent.isApproval = true;
             _Repository.Update(enContent);
             LogSystem entity = new LogSystem();
             entity.action = "Duyệt nội dung:" + enContent.contentId;
@@ -276,8 +322,8 @@
         public Content UnApproval(int _id)
         {
             var enContent = _Repository.GetSingleById((int)_id);
-            if (enContent != null && enContent.isApproval == false)
-                enContent.isTrash = true;
+            if (enContent != null)
+                enContent.isApproval = false;
             _Repository.Update(enContent);
             LogSystem entity = new LogSystem();
             entity.action = "Hủy duyệt nội dung:" + enContent.contentId;
@@ -288,6 +334,13 @@
             _RepositoryLogSystem.Add(entity);
             Save();
             return enContent;
+        }
+
+        public void UpdateView(Content model)
+        {
+            model.contentView += 1;
+            _Repository.Update(model);
+            Save();
         }
         public Content GetByAlias(string _alias)
         {

@@ -563,11 +563,20 @@ footer {
     line-height: 337px;
 }
 
-.des iframe {
+ .des iframe {
     width: 100%;
     height: auto;
 }
-
+.page-des iframe{
+    width: 100%;
+}
 .video-item {
     min-height: 40px;
+}
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 100%;
 }

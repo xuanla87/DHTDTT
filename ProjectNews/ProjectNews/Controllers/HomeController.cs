@@ -37,16 +37,14 @@ namespace ProjectNews.Controllers
             var entity = _services.GetByAlias(pageUrl);
             return View(entity);
         }
-
+        [ValidateInput(false)]
         public ActionResult Display(string pageUrl, int? _pageIndex)
         {
             var entity = _services.GetByAlias(pageUrl);
             if (entity != null)
             {
                 ViewBag.Title = entity.contentName;
-                entity.contentView += 1;
-                _services.Update(entity);
-                _services.Save();
+                _services.UpdateView(entity);
             }
             else
                 ViewBag.Title = _configSystemServices.GetValueByKey("SiteTitle");
@@ -159,11 +157,23 @@ namespace ProjectNews.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("BoxTinTucChung"), out Id);
-            var eSlider = _services.GetAll(null, null, null, Id, "TINTUC", 1, false, null, null, null, true);
+            var eSlider = _services.GetTinTucChung(null, null, null, null, null, 1, false, true, null, null);
             var entity = _services.GetById(Id);
-            ViewBag.Readmore = "<a href=\"" + entity.contentAlias + "\">>>>>Xem thêm</a>";
+            ViewBag.Readmore = "<a href=\"tin-tuc-chung\">>>>>Xem thêm</a>";
             ViewBag.Url = entity.contentAlias;
-            return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(8));
+            return PartialView(eSlider.ViewContents.Take(8));
+        }
+
+        public ActionResult getTinTucChung(int? _pageIndex)
+        {
+            int _totalRecord = 0;
+            _pageIndex = _pageIndex ?? 1;
+            var model = _services.GetTinTucChung(null, null, null, null, null, 1, false, true, _pageIndex, 10);
+            _totalRecord = model.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = model.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            return View(model.ViewContents.OrderByDescending(x => x.contentCreateTime));
         }
 
         public ActionResult getBoxTinTucNganh()
@@ -209,8 +219,8 @@ namespace ProjectNews.Controllers
 
         public ActionResult getThongBao()
         {
-            var eSlider = _services.GetThongBao(null, null, null, null, "TINTUC", 1, false, true, null, null);
-            return PartialView(eSlider.ViewContents.OrderByDescending(x => x.contentCreateTime).Take(10));
+            var eSlider = _services.GetThongBao(null, null, null, null, null, 1, false, true, null, null);
+            return PartialView(eSlider.ViewContents.Take(10));
         }
 
         public ActionResult getFooterInfo()

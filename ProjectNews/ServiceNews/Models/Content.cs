@@ -31,6 +31,7 @@
         public bool? isNew { get; set; }
         public string authorize { get; set; }
         public bool? isApproval { get; set; }
+        public bool? isFeature { get; set; }
     }
     public class ContentView
     {

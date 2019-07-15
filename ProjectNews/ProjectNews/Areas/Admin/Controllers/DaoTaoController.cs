@@ -93,7 +93,8 @@ namespace ProjectNews.Areas.Admin.Controllers
                     contentCreateUser = User.Identity.Name,
                     contentMetaKeywords = model.contentMetaKeywords,
                     contentUpdateUser = User.Identity.Name,
-                    contentBody = model.contentBody
+                    contentBody = model.contentBody,
+                    isFeature = model.isFeature
                 };
                 _services.Add(entity);
                 _services.Save();
@@ -126,7 +127,9 @@ namespace ProjectNews.Areas.Admin.Controllers
                     contentCreateUser = User.Identity.Name,
                     contentMetaKeywords = entity.contentMetaKeywords,
                     contentUpdateUser = User.Identity.Name,
-                    contentBody = entity.contentBody
+                    contentBody = entity.contentBody,
+                    isFeature = (entity.isFeature ?? false),
+                    isNew = (entity.isNew ?? false)
                 };
                 IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)model.contentId, "CHUYENMUCDAOTAO", 1);
                 ViewBag.contentParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
@@ -155,6 +158,8 @@ namespace ProjectNews.Areas.Admin.Controllers
                 entity.contentMetaKeywords = model.contentMetaKeywords;
                 entity.contentUpdateUser = User.Identity.Name;
                 entity.contentBody = model.contentBody;
+                entity.isFeature = model.isFeature;
+                entity.isNew = model.isNew;
                 _services.Update(entity);
                 _services.Save();
                 return RedirectToAction("Index", new { _parentId = entity.contentParentId });

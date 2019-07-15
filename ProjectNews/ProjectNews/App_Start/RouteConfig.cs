@@ -33,6 +33,11 @@ namespace ProjectNews
             defaults: new { controller = "Home", action = "LichCongTac", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+           name: "TINTUCCHUNG",
+           url: "tin-tuc-chung",
+           defaults: new { controller = "Home", action = "getTinTucChung", id = UrlParameter.Optional }
+           );
+            routes.MapRoute(
               name: "detail",
               url: "{pageUrl}",
               defaults: new { controller = "Home", action = "Display", pageUrl = UrlParameter.Optional }

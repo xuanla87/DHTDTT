@@ -81,20 +81,28 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         @Html.Label("Ngày viết", new { @class = "control-lable" })
                                         @Html.TextBoxFor(x => x.contentCreateTime, new { @class = "form-control datepicker", @placeholder = "Ngày.." })
                                         @Html.ValidationMessageFor(x => x.contentCreateTime, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     @Html.Label("Tác giả", new { @class = "control-lable" })
                                     @Html.TextBoxFor(x => x.authorize, new { @class = "form-control", @placeholder = "Nhập tác giả.." })
                                 </div>
                                 <div class="col-md-2">
                                     @Html.Label("Thứ tự", new { @class = "control-lable" })
                                     @Html.TextBoxFor(x => x.isSort, new { @class = "form-control number", @placeholder = "Nhập số.." })
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.Label("Thông báo mới", new { @class = "control-lable" })
+                                    @Html.CheckBoxFor(x => x.isNew)
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.Label("Tin tức chung", new { @class = "control-lable" })
+                                    @Html.CheckBoxFor(x => x.isFeature)
                                 </div>
                                 @Html.HiddenFor(x => x.contentAlias)
                                 @Html.HiddenFor(x => x.contentId)
