@@ -520,6 +520,8 @@ footer {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+    float: left;
+    width: 100%;
 }
 
     .page-content .item {
