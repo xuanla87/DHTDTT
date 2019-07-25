@@ -59,6 +59,16 @@
                                 @Html.DropDownListFor(x => x.DanhMucPhai, null, "---Chọn---", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.DanhMucPhai, "", new { @class = "text-danger" })
                             </div>
+                            <div class="form-group">
+                                @Html.Label("Trang tiếng anh", new { @class = "control-lable" })
+                                @Html.TextBoxFor(x => x.LinkEnglish, new { @class = "form-control", @placeholder = "Nhập link.." })
+                                @Html.ValidationMessageFor(x => x.LinkEnglish, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Sơ đồ website", new { @class = "control-lable" })
+                                @Html.TextBoxFor(x => x.LinkEnglish, new { @class = "form-control", @placeholder = "Nhập link.." })
+                                @Html.ValidationMessageFor(x => x.LinkSiteMap, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -95,6 +105,16 @@
                                 @Html.Label("Box media", new { @class = "control-lable" })
                                 @Html.DropDownListFor(x => x.BoxMedia, null, "---Chọn---", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.BoxMedia, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Link FanPage", new { @class = "control-lable" })
+                                @Html.TextBoxFor(x => x.LinkFanPage, new { @class = "form-control", @placeholder = "Nhập link.." })
+                                @Html.ValidationMessageFor(x => x.LinkFanPage, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Link Messenger", new { @class = "control-lable" })
+                                @Html.TextBoxFor(x => x.LinkMessenger, new { @class = "form-control", @placeholder = "Nhập link.." })
+                                @Html.ValidationMessageFor(x => x.LinkMessenger, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

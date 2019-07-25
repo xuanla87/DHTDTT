@@ -42,6 +42,10 @@
                                             <td>
                                                 <a title="Cập nhật mật khẩu" class="btn btn-primary btn-flat" href="@Url.Action("ChangePass", "ThanhVien", new { Id = item.Id })"><i class="fa fa-key"></i> Đổi mật khẩu</a>
                                                 <a title="Phân bộ môn" class="btn btn-primary btn-flat" href="@Url.Action("AddBoMon", "ThanhVien", new { Id = item.Id })"><i class="fa fa-cube"></i> Phân bộ môn</a>
+                                                @if (item.UserName != "admin@gmail.com")
+                                                {
+                                                    <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trashUser('@item.Id','ThanhVien')"><i class="fa fa-trash"></i></button>
+                                                }
                                             </td>
                                         </tr>
                                     }

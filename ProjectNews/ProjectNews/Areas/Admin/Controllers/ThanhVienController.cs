@@ -51,8 +51,11 @@ namespace ProjectNews.Areas.Admin.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                    var idResult = um.AddToRole(user.Id, model.RoleName);
+                    if(!string.IsNullOrEmpty(model.RoleName))
+                    {
+                        var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                        var idResult = um.AddToRole(user.Id, model.RoleName);
+                    }
                     return RedirectToAction("Index");
                 }
                 AddErrors(result);
@@ -293,7 +296,7 @@ namespace ProjectNews.Areas.Admin.Controllers
             {
                 ApplicationDbContext db = new ApplicationDbContext();
                 var role = db.Roles.Find(id);
-                
+
                 ModelRoleFunction model = new ModelRoleFunction();
                 model.UserName = role.Name;
                 var _News = _services.GetByUserNameCode(role.Name, "TINTUC");
@@ -405,6 +408,24 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _services.Add(_Trained);
             }
             return View(model);
+        }
+
+        public ActionResult DeleteUser(string Id)
+        {
+            var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var model = UserManager.FindById(Id);
+            if (model != null)
+            {
+                //Xoa role
+                var currentRoles = new List<IdentityUserRole>();
+                currentRoles.AddRange(model.Roles);
+                foreach (var role in currentRoles)
+                {
+                    um.RemoveFromRole(Id, role.RoleId);
+                }
+                UserManager.Delete(model);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
     }

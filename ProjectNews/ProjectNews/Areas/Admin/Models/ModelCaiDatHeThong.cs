@@ -27,5 +27,9 @@ namespace ProjectNews.Areas.Admin.Models
         public int? BoxBanner { get; set; }
         public int? BoxBannerRight { get; set; }
         public string BanDo { get; set; }
+        public string LinkFanPage { get; set; }
+        public string LinkMessenger { get; set; }
+        public string LinkEnglish { get; set; }
+        public string LinkSiteMap { get; set; }
     }
 }

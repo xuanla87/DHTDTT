@@ -60,6 +60,101 @@ namespace ProjectNews.Controllers
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
+        public string MenuRigth2()
+        {
+            int _languageId = 1;
+
+            string _html = "";
+            _html += "<div class=\"box\">";
+            _html += "<div class=\"title pading-left-20  pading-top-10  pading-bottom-10 text-uppercase\">";
+            _html += "Chuyên mục tin tức</div>";
+            var model = _services.GetParent("CHUYENMUCTINTUC", _languageId);
+            _html += "<ul class=\"right-nav nav\">";
+            foreach (var item in model)
+            {
+                _html += " <li>";
+                _html += " <a href=\"" + item.contentAlias + "\">";
+                _html += item.contentName;
+                _html += "</a>";
+                _html += SubMenu2((int)item.contentId, item.contentKey);
+                _html += "</li>";
+            }
+            _html += "</ul>";
+            _html += "</div>";
+            return _html;
+        }
+        public string MainMenu2()
+        {
+            int _languageId = 1;
+            int Id = 0;
+            if (_languageId == 1)
+                int.TryParse(_configSystemServices.GetValueByKey("DanhMucChinh"), out Id);
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
+            string _html = "";
+            _html += "<ul class=\"main-nav nav navbar-nav\">";
+            foreach (var item in eMenus)
+            {
+                if (item.menuLink == "/" || item.menuLink == "")
+                {
+                    _html += " <li class=\"active\">";
+                    _html += " <a href=\"" + item.menuLink + "\">";
+                    _html += item.menuName;
+                    _html += "</a>";
+                    _html += SubMenu(null, item.menuLink);
+                    _html += "</li>";
+                }
+                else
+                {
+                    _html += " <li>";
+                    _html += " <a href=\"" + item.menuLink + "\">";
+                    _html += item.menuName;
+                    _html += "</a>";
+                    _html += SubMenu(null, item.menuLink);
+                    _html += "</li>";
+                }
+            }
+            _html += "</ul>";
+            return _html;
+        }
+
+        public string SubMenu(string _html, string _link)
+        {
+            var entity = _services.GetByAlias(_link);
+            if (entity != null)
+            {
+                var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null, null, null);
+                var List = model.ViewContents.OrderBy(x => x.isSort);
+                _html += " <ul class=\"sub-menu nav\">";
+                foreach (var item in List)
+                {
+                    _html += " <li>";
+                    _html += " <a href=\"" + item.contentAlias + "\">";
+                    _html += item.contentName;
+                    _html += "</a>";
+                    _html += SubMenu2((int)item.contentId, item.contentKey);
+                    _html += "</li>";
+                }
+                _html += "</ul>";
+            }
+            return _html;
+        }
+        public string SubMenu2(int _id, string _key)
+        {
+            string _html = "";
+            var model = _services.GetByParent(_id, _key);
+            _html += " <ul class=\"sub-menu nav\">";
+            foreach (var item in model)
+            {
+                _html += " <li>";
+                _html += " <a href=\"" + item.contentAlias + "\">";
+                _html += item.contentName;
+                _html += "</a>";
+                _html += SubMenu2((int)item.contentId, item.contentKey);
+                _html += "</li>";
+            }
+            _html += "</ul>";
+            return _html;
+        }
 
         public ActionResult getSubContentByLink(string _link)
         {
@@ -246,16 +341,23 @@ namespace ProjectNews.Controllers
 
         public ActionResult _HitCounter()
         {
+
             HitCounterEntity db = new HitCounterEntity();
             int TotalOnline = 0;
             int TotalYesterday = 0;
             int TotalMonth = 0;
             int Total = 0;
-            var _hit = db.Visitors.ToList();
-            TotalOnline = (int)HttpContext.Application["Totaluser"];
-            TotalYesterday = _hit.Where(x => x.visitTime <= DateTime.Now && x.visitTime >= DateTime.Now.Date).Count();
-            TotalMonth = _hit.Where(x => x.visitTime.Year == DateTime.Now.Year && x.visitTime.Month == DateTime.Now.Month).Count();
-            Total = _hit.Count();
+            try
+            {
+                var _hit = db.Visitors.ToList();
+                TotalOnline = (int)HttpContext.Application["Totaluser"];
+                TotalYesterday = _hit.Where(x => x.visitTime <= DateTime.Now && x.visitTime >= DateTime.Now.Date).Count();
+                TotalMonth = _hit.Where(x => x.visitTime.Year == DateTime.Now.Year && x.visitTime.Month == DateTime.Now.Month).Count();
+                Total = _hit.Count();
+            }
+            catch
+            {
+            }
             ViewBag.TotalOnline = TotalOnline.ToString("N0");
             ViewBag.TotalYesterday = TotalYesterday.ToString("N0"); ;
             ViewBag.TotalMonth = TotalMonth.ToString("N0");
@@ -318,6 +420,10 @@ namespace ProjectNews.Controllers
 
         public ActionResult getMenuTop()
         {
+            ViewBag.LinkFanPage = _configSystemServices.GetValueByKey("LinkFanPage");
+            ViewBag.LinkSiteMap = _configSystemServices.GetValueByKey("LinkSiteMap");
+            ViewBag.LinkMessenger = _configSystemServices.GetValueByKey("LinkMessenger");
+            ViewBag.LinkEnglish = _configSystemServices.GetValueByKey("LinkEnglish");
             return PartialView();
         }
 

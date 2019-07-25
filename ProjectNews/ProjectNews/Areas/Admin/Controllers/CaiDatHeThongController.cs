@@ -36,6 +36,10 @@ namespace ProjectNews.Areas.Admin.Controllers
             model.SiteKeywords = _services.GetValueByKey("SiteKeywords");
             model.SiteTitle = _services.GetValueByKey("SiteTitle");
             model.BanDo = _services.GetValueByKey("BanDo");
+            model.LinkSiteMap = _services.GetValueByKey("LinkSiteMap");
+            model.LinkMessenger = _services.GetValueByKey("LinkMessenger");
+            model.LinkFanPage = _services.GetValueByKey("LinkFanPage");
+            model.LinkEnglish = _services.GetValueByKey("LinkEnglish");
             if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxPhongSuAnh")))
                 model.BoxPhongSuAnh = int.Parse(_services.GetValueByKey("BoxPhongSuAnh"));
             if (!string.IsNullOrEmpty(_services.GetValueByKey("BoxTinTucChung")))
@@ -98,6 +102,10 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _services.SaveData("BoxBanner", model.BoxBanner.ToString());
                 _services.SaveData("BoxBannerRight", model.BoxBannerRight.ToString());
                 _services.SaveData("BanDo", model.BanDo);
+                _services.SaveData("LinkSiteMap", model.LinkSiteMap);
+                _services.SaveData("LinkMessenger", model.LinkMessenger);
+                _services.SaveData("LinkFanPage", model.LinkFanPage);
+                _services.SaveData("LinkEnglish", model.LinkEnglish);
             }
             return RedirectToAction("Index");
         }
