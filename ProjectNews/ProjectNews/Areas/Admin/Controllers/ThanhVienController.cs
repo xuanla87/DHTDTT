@@ -20,10 +20,12 @@ namespace ProjectNews.Areas.Admin.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IRoleFunctionServices _services;
+        private IContentServices _servicesContent;
 
-        public ThanhVienController(IRoleFunctionServices services)
+        public ThanhVienController(IRoleFunctionServices services, IContentServices servicesContent)
         {
             _services = services;
+            _servicesContent = servicesContent;
         }
         public ActionResult Index()
         {
@@ -51,7 +53,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    if(!string.IsNullOrEmpty(model.RoleName))
+                    if (!string.IsNullOrEmpty(model.RoleName))
                     {
                         var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                         var idResult = um.AddToRole(user.Id, model.RoleName);
@@ -84,10 +86,12 @@ namespace ProjectNews.Areas.Admin.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             if (ModelState.IsValid)
             {
-                var result = await UserManager.ChangePasswordAsync(model.UserId, model.OldPassword, model.NewPassword);
+                var result = await UserManager.RemovePasswordAsync(model.UserId);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    var _out = await UserManager.AddPasswordAsync(model.UserId, model.ConfirmPassword);
+                    if (_out.Succeeded)
+                        return RedirectToAction("Index");
                 }
             }
             return View(model);
@@ -345,7 +349,10 @@ namespace ProjectNews.Areas.Admin.Controllers
                     model.FunctionEditCalendar = _Caledar.ActionEdit;
                     model.FunctionAddCalendar = _Caledar.ActionAdd;
                     model.FunctionDeleteCalendar = _Caledar.ActionDelete;
+                    model.ChuyenMucDonViId = _Caledar.ChuyenMucId ?? 0;
                 }
+                IEnumerable<DropdownModel> category = _servicesContent.Dropdownlist(model.ChuyenMucDonViId, null, "DONVIPHONGKHOA", 1);
+                ViewBag.ChuyenMucDonViId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -365,6 +372,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _News.ActionDelete = model.FunctionDeleteNews;
                 _News.ActionAdmin = model.FunctionAdminNews;
                 _News.Id = model.IdNews;
+                _News.ChuyenMucId = model.ChuyenMucDonViId;
                 _services.Add(_News);
                 var _Document = new RoleFunction();
                 _Document.UserName = model.UserName;
@@ -375,6 +383,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _Document.ActionDelete = model.FunctionDeleteDocument;
                 _Document.ActionAdmin = model.FunctionAdminDocument;
                 _Document.Id = model.IdDocument;
+                _Document.ChuyenMucId = model.ChuyenMucDonViId;
                 _services.Add(_Document);
                 var _Calnedar = new RoleFunction();
                 _Calnedar.UserName = model.UserName;
@@ -385,6 +394,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _Calnedar.ActionDelete = model.FunctionDeleteCalendar;
                 _Calnedar.ActionAdmin = model.FunctionAdminCalendar;
                 _Calnedar.Id = model.IdCalendar;
+                _Calnedar.ChuyenMucId = model.ChuyenMucDonViId;
                 _services.Add(_Calnedar);
                 var _Media = new RoleFunction();
                 _Media.UserName = model.UserName;
@@ -395,6 +405,7 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _Media.ActionDelete = model.FunctionDeleteMedia;
                 _Media.ActionAdmin = model.FunctionAdminMedia;
                 _Media.Id = model.IdMedia;
+                _Media.ChuyenMucId = model.ChuyenMucDonViId;
                 _services.Add(_Media);
                 var _Trained = new RoleFunction();
                 _Trained.UserName = model.UserName;
@@ -405,8 +416,11 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _Trained.ActionDelete = model.FunctionDeleteTrained;
                 _Trained.ActionAdmin = model.FunctionAdminTrained;
                 _Trained.Id = model.IdTrained;
+                _Trained.ChuyenMucId = model.ChuyenMucDonViId;
                 _services.Add(_Trained);
             }
+            IEnumerable<DropdownModel> category = _servicesContent.Dropdownlist(model.ChuyenMucDonViId, null, "DONVIPHONGKHOA", 1);
+            ViewBag.ChuyenMucDonViId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(model);
         }
 

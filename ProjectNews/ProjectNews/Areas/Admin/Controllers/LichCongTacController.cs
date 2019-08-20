@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using ProjectNews.Areas.Admin.Models;
+using ProjectNews.Models;
 using ServiceNews.Models;
 using ServiceNews.Services;
 
@@ -13,9 +16,11 @@ namespace ProjectNews.Areas.Admin.Controllers
     public class LichCongTacController : Controller
     {
         private IContentServices _services;
-        public LichCongTacController(IContentServices services)
+        private IRoleFunctionServices _servicesRoleFunction;
+        public LichCongTacController(IContentServices services, IRoleFunctionServices servicesRoleFunction)
         {
             _services = services;
+            _servicesRoleFunction = servicesRoleFunction;
         }
 
         public ActionResult Index(string _searchKey, int? _parentId, int? _pageIndex)
@@ -26,18 +31,28 @@ namespace ProjectNews.Areas.Admin.Controllers
             {
                 _userName = null;
                 result = _services.GetAll(_searchKey, null, null, _parentId, "LICHCONGTAC", 1, false, _pageIndex, 20, _userName, null);
+                IEnumerable<DropdownModel> category = _services.Dropdownlist(_parentId.GetValueOrDefault(), null, "DONVIPHONGKHOA", 1);
+                ViewBag._parentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             }
             else
             {
                 _userName = User.Identity.Name;
                 result = _services.GetAll(_searchKey, null, null, _parentId, "LICHCONGTAC", 1, false, null, null, _userName, null);
+
+                var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = um.FindById(User.Identity.GetUserId());
+                var _roleUser = user.Roles.FirstOrDefault();
+                ApplicationDbContext db = new ApplicationDbContext();
+                var role = db.Roles.Find(_roleUser.RoleId);
+                var _Trained = _servicesRoleFunction.GetByUserNameCode(role.Name, "TRAINED");
+                IEnumerable<DropdownModel> category = _services.Dropdownlist2(_Trained.ChuyenMucId.GetValueOrDefault(), null, "DONVIPHONGKHOA", 1);
+                ViewBag._parentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             }
             int totalPage = result?.Total ?? 0;
             ViewBag.TotalPage = totalPage;
             ViewBag.PageIndex = _pageIndex ?? 1;
             ViewBag.SearchKey = string.IsNullOrWhiteSpace(_searchKey) ? string.Empty : _searchKey;
-            IEnumerable<DropdownModel> category = _services.Dropdownlist(_parentId.GetValueOrDefault(), null, "DONVIPHONGKHOA", 1);
-            ViewBag._parentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+
             if (result != null && result.ViewContents.Count() > 0)
             {
                 IEnumerable<ModelLichCongTac> model = result.ViewContents.Select(x => new ModelLichCongTac
@@ -68,8 +83,23 @@ namespace ProjectNews.Areas.Admin.Controllers
         public ActionResult ThemMoi()
         {
             var model = new ModelLichCongTac { Id = 0 };
-            IEnumerable<DropdownModel> category = _services.Dropdownlist(0, null, "DONVIPHONGKHOA", 1);
-            ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            if (User.IsInRole("Admin"))
+            {
+                IEnumerable<DropdownModel> category = _services.Dropdownlist(0, null, "DONVIPHONGKHOA", 1);
+                ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            }
+            else
+            {
+                var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = um.FindById(User.Identity.GetUserId());
+                var _roleUser = user.Roles.FirstOrDefault();
+                ApplicationDbContext db = new ApplicationDbContext();
+                var role = db.Roles.Find(_roleUser.RoleId);
+                var _Trained = _servicesRoleFunction.GetByUserNameCode(role.Name, "TRAINED");
+                IEnumerable<DropdownModel> category = _services.Dropdownlist2(_Trained.ChuyenMucId.GetValueOrDefault(), null, "DONVIPHONGKHOA", 1);
+                ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            }
+
             return View(model);
         }
 
@@ -103,8 +133,22 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _services.Save();
                 return RedirectToAction("Index", new { _parentId = entity.contentParentId });
             }
-            IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)model.Id, "LICHCONGTAC", 1);
-            ViewBag.DonviCha = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            if (User.IsInRole("Admin"))
+            {
+                IEnumerable<DropdownModel> category = _services.Dropdownlist(0, null, "DONVIPHONGKHOA", 1);
+                ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            }
+            else
+            {
+                var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = um.FindById(User.Identity.GetUserId());
+                var _roleUser = user.Roles.FirstOrDefault();
+                ApplicationDbContext db = new ApplicationDbContext();
+                var role = db.Roles.Find(_roleUser.RoleId);
+                var _Trained = _servicesRoleFunction.GetByUserNameCode(role.Name, "TRAINED");
+                IEnumerable<DropdownModel> category = _services.Dropdownlist2(_Trained.ChuyenMucId.GetValueOrDefault(), null, "DONVIPHONGKHOA", 1);
+                ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            }
             return View(model);
         }
 
@@ -122,8 +166,22 @@ namespace ProjectNews.Areas.Admin.Controllers
                     Body = entity.contentBody,
                     ParentId = entity.contentParentId
                 };
-                IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)model.Id, "DONVIPHONGKHOA", 1);
-                ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+                if (User.IsInRole("Admin"))
+                {
+                    IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)model.Id, "DONVIPHONGKHOA", 1);
+                    ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+                }
+                else
+                {
+                    var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var user = um.FindById(User.Identity.GetUserId());
+                    var _roleUser = user.Roles.FirstOrDefault();
+                    ApplicationDbContext db = new ApplicationDbContext();
+                    var role = db.Roles.Find(_roleUser.RoleId);
+                    var _Trained = _servicesRoleFunction.GetByUserNameCode(role.Name, "TRAINED");
+                    IEnumerable<DropdownModel> category = _services.Dropdownlist2(_Trained.ChuyenMucId.GetValueOrDefault(), (int)model.Id, "DONVIPHONGKHOA", 1);
+                    ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+                }
                 return View(model);
             }
             else
@@ -148,8 +206,22 @@ namespace ProjectNews.Areas.Admin.Controllers
                 _services.Save();
                 return RedirectToAction("Index", new { _parentId = entity.contentParentId });
             }
-            IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)model.Id, "DONVIPHONGKHOA", 1);
-            ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            if (User.IsInRole("Admin"))
+            {
+                IEnumerable<DropdownModel> category = _services.Dropdownlist(0, (int)model.Id, "DONVIPHONGKHOA", 1);
+                ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            }
+            else
+            {
+                var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = um.FindById(User.Identity.GetUserId());
+                var _roleUser = user.Roles.FirstOrDefault();
+                ApplicationDbContext db = new ApplicationDbContext();
+                var role = db.Roles.Find(_roleUser.RoleId);
+                var _Trained = _servicesRoleFunction.GetByUserNameCode(role.Name, "TRAINED");
+                IEnumerable<DropdownModel> category = _services.Dropdownlist2(_Trained.ChuyenMucId.GetValueOrDefault(), (int)model.Id, "DONVIPHONGKHOA", 1);
+                ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            }
             return View(model);
         }
 

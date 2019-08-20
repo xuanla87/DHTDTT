@@ -24,13 +24,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    @Html.Label("Mật khẩu cũ", new { @class = "control-lable" })
-                                    @Html.PasswordFor(x => x.OldPassword, new { @class = "form-control", @placeholder = "Nhập mật khẩu.." })
-                                    @Html.ValidationMessageFor(x => x.OldPassword, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     @Html.Label("Mật khẩu mới", new { @class = "control-lable" })
                                     @Html.PasswordFor(x => x.NewPassword, new { @class = "form-control", @placeholder = "Nhập mật khẩu.." })
                                     @Html.ValidationMessageFor(x => x.NewPassword, "", new { @class = "text-danger" })

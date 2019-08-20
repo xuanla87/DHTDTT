@@ -34,5 +34,7 @@ namespace ProjectNews.Areas.Admin.Models
         public bool FunctionEditMedia { get; set; }
         public bool FunctionDeleteMedia { get; set; }
         public bool FunctionAdminMedia { get; set; }
+
+        public int ChuyenMucDonViId { get; set; }
     }
 }

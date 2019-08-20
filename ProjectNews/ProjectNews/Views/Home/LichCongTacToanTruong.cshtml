@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ServiceNews.Models.Content>
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="title">
+                            <div class="text">
+                                <a href="@item.contentAlias" title="@item.contentName">@item.contentName</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+

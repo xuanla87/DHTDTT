@@ -42,11 +42,6 @@ namespace ProjectNews.Models
     public class ChangePasswordViewModel
     {
         [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Mật khẩu cũ")]
-        public string OldPassword { get; set; }
-
-        [Required]
         [StringLength(100, ErrorMessage = "Mật khẩu phải lớn hơn {0} và nhỏ hơn {2} ký tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu mới")]

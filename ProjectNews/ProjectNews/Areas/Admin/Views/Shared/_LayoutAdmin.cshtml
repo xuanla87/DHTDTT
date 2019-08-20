@@ -82,6 +82,19 @@
                         </li>
                         <li class="treeview">
                             <a href="#">
+                                <i class="fa fa-calendar"></i>
+                                <span>Lịch công tác toàn trường</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index","LichCongTacToanTruong")"><i class="fa fa-circle-o"></i> Danh sách lịch công tác</a></li>
+                                <li><a href="@Url.Action("Detail","LichCongTacToanTruong")"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
                                 <i class="fa fa-book"></i>
                                 <span>Đào tạo</span>
                                 <span class="pull-right-container">
@@ -209,7 +222,6 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="@Url.Action("Index","DonViPhongKhoa")"><i class="fa fa-circle-o"></i> Danh sách đơn vị</a></li>
                                 <li><a href="@Url.Action("Index","LichCongTac")"><i class="fa fa-circle-o"></i> Danh sách lịch công tác</a></li>
                                 <li><a href="@Url.Action("ThemMoi","LichCongTac")"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
                             </ul>

@@ -29,6 +29,8 @@ namespace ProjectNews.Controllers
         }
         public ActionResult Index()
         {
+            DateTime _ngayThanhLap = new DateTime(2019, 12, 14);
+            ViewBag.DateCountDown = (_ngayThanhLap - DateTime.Now.Date).TotalDays;
             return PartialView();
         }
 
@@ -76,7 +78,7 @@ namespace ProjectNews.Controllers
                 _html += " <a href=\"" + item.contentAlias + "\">";
                 _html += item.contentName;
                 _html += "</a>";
-                _html += SubMenu2((int)item.contentId, item.contentKey);
+                _html += SubMenu2("sub-menu nav", (int)item.contentId, item.contentKey);
                 _html += "</li>";
             }
             _html += "</ul>";
@@ -100,7 +102,7 @@ namespace ProjectNews.Controllers
                     _html += " <a href=\"" + item.menuLink + "\">";
                     _html += item.menuName;
                     _html += "</a>";
-                    _html += SubMenu(null, item.menuLink);
+                    _html += SubMenu("sub-menu nav", null, item.menuLink);
                     _html += "</li>";
                 }
                 else
@@ -109,7 +111,7 @@ namespace ProjectNews.Controllers
                     _html += " <a href=\"" + item.menuLink + "\">";
                     _html += item.menuName;
                     _html += "</a>";
-                    _html += SubMenu(null, item.menuLink);
+                    _html += SubMenu("sub-menu nav", null, item.menuLink);
                     _html += "</li>";
                 }
             }
@@ -117,39 +119,39 @@ namespace ProjectNews.Controllers
             return _html;
         }
 
-        public string SubMenu(string _html, string _link)
+        public string SubMenu(string _css, string _html, string _link)
         {
             var entity = _services.GetByAlias(_link);
             if (entity != null)
             {
                 var model = _services.GetAll(null, null, null, (int)entity.contentId, entity.contentKey, 1, false, null, null, null, null);
                 var List = model.ViewContents.OrderBy(x => x.isSort);
-                _html += " <ul class=\"sub-menu nav\">";
+                _html += " <ul class=\"" + _css + "\">";
                 foreach (var item in List)
                 {
                     _html += " <li>";
                     _html += " <a href=\"" + item.contentAlias + "\">";
                     _html += item.contentName;
                     _html += "</a>";
-                    _html += SubMenu2((int)item.contentId, item.contentKey);
+                    _html += SubMenu2(_css, (int)item.contentId, item.contentKey);
                     _html += "</li>";
                 }
                 _html += "</ul>";
             }
             return _html;
         }
-        public string SubMenu2(int _id, string _key)
+        public string SubMenu2(string _css, int _id, string _key)
         {
             string _html = "";
             var model = _services.GetByParent(_id, _key);
-            _html += " <ul class=\"sub-menu nav\">";
+            _html += " <ul class=\"" + _css + "\">";
             foreach (var item in model)
             {
                 _html += " <li>";
                 _html += " <a href=\"" + item.contentAlias + "\">";
                 _html += item.contentName;
                 _html += "</a>";
-                _html += SubMenu2((int)item.contentId, item.contentKey);
+                _html += SubMenu2(_css, (int)item.contentId, item.contentKey);
                 _html += "</li>";
             }
             _html += "</ul>";
@@ -491,6 +493,12 @@ namespace ProjectNews.Controllers
             return View(entity.ViewContents.OrderByDescending(x => x.contentCreateTime));
         }
 
+        public ActionResult LichCongTacToanTruong()
+        {
+            var entity = _services.GetAll(null, null, null, null, "LICHCONGTACTOANTRUONG", 1, false, null, 5, null, true);
+            return PartialView(entity.ViewContents);
+        }
+
         public ActionResult LichCongTac()
         {
             var entity = _services.GetAll(null, null, null, null, "DONVIPHONGKHOA", 1, false, null, null, null, true);
@@ -557,6 +565,29 @@ namespace ProjectNews.Controllers
             {
                 return "";
             }
+        }
+
+        public ActionResult SoDoWebsite()
+        {
+            int _languageId = 1;
+            int Id = 0;
+            if (_languageId == 1)
+                int.TryParse(_configSystemServices.GetValueByKey("DanhMucChinh"), out Id);
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
+            string _html = "";
+            _html += "<ul>";
+            foreach (var item in eMenus)
+            {
+                _html += " <li>";
+                _html += "<a href=\"" + item.menuLink + "\">";
+                _html += item.menuName;
+                _html += "</a>";
+                _html += SubMenu("", null, item.menuLink);
+                _html += "</li>";
+            }
+            _html += "</ul>";
+            ViewBag.OutHtml = _html;
+            return View();
         }
     }
 }

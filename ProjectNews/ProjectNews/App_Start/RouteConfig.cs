@@ -33,10 +33,20 @@ namespace ProjectNews
             defaults: new { controller = "Home", action = "LichCongTac", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-           name: "TINTUCCHUNG",
-           url: "tin-tuc-chung",
-           defaults: new { controller = "Home", action = "getTinTucChung", id = UrlParameter.Optional }
-           );
+            name: "LICHCONGTACTOANTRUONG",
+            url: "lich-cong-tac-toan-truong",
+            defaults: new { controller = "Home", action = "LichCongTacToanTruong", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+            name: "SODOWEBSITE",
+            url: "so-do-website",
+            defaults: new { controller = "Home", action = "SoDoWebsite", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+            name: "TINTUCCHUNG",
+            url: "tin-tuc-chung",
+            defaults: new { controller = "Home", action = "getTinTucChung", id = UrlParameter.Optional }
+            );
             routes.MapRoute(
               name: "detail",
               url: "{pageUrl}",

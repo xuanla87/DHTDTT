@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Phân quyên thành viên";
+    ViewBag.Title = "Phân quyên bộ môn";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @model ProjectNews.Areas.Admin.Models.ModelRoleFunction
@@ -154,7 +154,10 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    @Html.Label("Bộ môn lịc công tác", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.ChuyenMucDonViId, null, "---Chọn bộ môn---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.ChuyenMucDonViId, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-2">
 

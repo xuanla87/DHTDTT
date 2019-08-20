@@ -17,5 +17,6 @@
         public bool ActionEdit { get; set; }
         public bool ActionDelete { get; set; }
         public bool ActionAdmin { get; set; }
+        public int? ChuyenMucId { get; set; }
     }
 }

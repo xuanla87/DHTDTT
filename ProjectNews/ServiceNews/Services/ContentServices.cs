@@ -25,11 +25,16 @@
         Content UnApproval(int _id);
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize, string _userName, bool? _isApproval);
+
         ContentView GetAllAdmin(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
         IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
 
+        IEnumerable<Content> GetParent(string _contentKey, int? _languageId);
+        IEnumerable<Content> GetByParent(int? _Id, string _contentKey);
+
         ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isNew, int? _pageIndex, int? _pageSize);
+
         ContentView GetTinTucChung(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isNew, int? _pageIndex, int? _pageSize);
 
         Content GetById(int _id);
@@ -39,6 +44,8 @@
         void UpdateView(Content model);
 
         IEnumerable<DropdownModel> Dropdownlist(int _id, int? _curentId, string _key, int _languageId);
+
+        IEnumerable<DropdownModel> Dropdownlist2(int _id, int? _curentId, string _key, int _languageId);
 
         string GetNameById(int? _id);
 
@@ -61,7 +68,7 @@
         {
             _Repository.Add(_model);
             LogSystem entity = new LogSystem();
-            entity.action = "Thêm mới nội dung:" + _model.contentId;
+            entity.action = "Thêm mới nội dung: <a href=\"" + _model.contentAlias + "\" target=\"_blank\">" + _model.contentName + "</a>";
             entity.browser = "";
             entity.ipAddress = "";
             entity.userAction = _model.contentCreateUser;
@@ -208,7 +215,7 @@
 
         public ContentView GetTinTucChung(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _isFeature, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value  && x.isApproval == true);
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.isApproval == true);
 
             if (!string.IsNullOrEmpty(_keyWords))
             {
@@ -276,6 +283,19 @@
             }
             return enContent;
         }
+
+        public IEnumerable<Content> GetParent(string _contentKey, int? _languageId)
+        {
+            var enContent = _Repository.GetMulti(x => x.contentLanguageId == _languageId.Value && x.contentKey == _contentKey && x.contentParentId == null && x.isTrash == false);
+            enContent = enContent.OrderBy(x => x.isSort);
+            return enContent;
+        }
+        public IEnumerable<Content> GetByParent(int? Id, string _contentKey)
+        {
+            var enContent = _Repository.GetMulti(x => x.contentParentId == Id && x.isTrash == false && x.contentKey == _contentKey);
+            enContent = enContent.OrderBy(x => x.isSort);
+            return enContent;
+        }
         public Content Trash(int _id)
         {
             var enContent = _Repository.GetSingleById((int)_id);
@@ -283,7 +303,7 @@
                 enContent.isTrash = true;
             _Repository.Update(enContent);
             LogSystem entity = new LogSystem();
-            entity.action = "Xóa nội dung:" + enContent.contentId;
+            entity.action = "Xóa nội dung: <a href=\"" + enContent.contentAlias + "\" target=\"_blank\">" + enContent.contentName + "</a>";
             entity.browser = "";
             entity.ipAddress = "";
             entity.userAction = enContent.contentUpdateUser;
@@ -310,7 +330,7 @@
                 enContent.isApproval = true;
             _Repository.Update(enContent);
             LogSystem entity = new LogSystem();
-            entity.action = "Duyệt nội dung:" + enContent.contentId;
+            entity.action = "Duyệt nội dung: <a href=\"" + enContent.contentAlias + "\" target=\"_blank\">" + enContent.contentName + "</a>";
             entity.browser = "";
             entity.ipAddress = "";
             entity.userAction = enContent.contentUpdateUser;
@@ -326,7 +346,7 @@
                 enContent.isApproval = false;
             _Repository.Update(enContent);
             LogSystem entity = new LogSystem();
-            entity.action = "Hủy duyệt nội dung:" + enContent.contentId;
+            entity.action = "Hủy duyệt nội dung: <a href=\"" + enContent.contentAlias + "\" target=\"_blank\">" + enContent.contentName + "</a>";
             entity.browser = "";
             entity.ipAddress = "";
             entity.userAction = enContent.contentUpdateUser;
@@ -367,7 +387,30 @@
             }
             else return null;
         }
-
+        public IEnumerable<DropdownModel> Dropdownlist2(int _id, int? _curentId, string _key, int _languageId)
+        {
+            try
+            {
+                var entitys = _Repository.GetMulti(x => x.isTrash == false && x.contentKey == _key && x.contentLanguageId == _languageId);
+                if (_curentId.HasValue && _curentId > 0)
+                    entitys = entitys.Where(x => x.contentId != _curentId && x.contentParentId != _curentId);
+                int totalRecord = entitys.Count();
+                var result = new List<DropdownModel>();
+                foreach (var item in entitys)
+                {
+                    if (_id > 0 && item.contentId == _id)
+                    {
+                        result.Add(new DropdownModel { Text = item.contentName, Value = item.contentId });
+                        DropdownlistChild(result, entitys, (int)item.contentId, "-");
+                    }
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+                return new List<DropdownModel>();
+            }
+        }
         public IEnumerable<DropdownModel> Dropdownlist(int _id, int? _curentId, string _key, int _languageId)
         {
             try
@@ -422,7 +465,7 @@
         {
             _Repository.Update(_model);
             LogSystem entity = new LogSystem();
-            entity.action = "Sửa nội dung:" + _model.contentId;
+            entity.action = "Sửa nội dung: <a href=\"" + _model.contentAlias + "\" target=\"_blank\">" + _model.contentName + "</a>";
             entity.browser = "";
             entity.ipAddress = "";
             entity.userAction = _model.contentUpdateUser;
